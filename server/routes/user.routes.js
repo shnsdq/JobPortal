@@ -5,7 +5,7 @@ import { verifyJwt } from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.post('/register', upload.single('image'), register);
+router.post('/register', upload.single("file"), register);
 router.post('/login', login);
 router.get('/logout', logout);
 router.patch('/updateProfile', verifyJwt,upload.fields([{ name: "resume", maxCount: 1 }, { name: "image", maxCount: 1 }]), updateProfile);

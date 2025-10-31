@@ -138,9 +138,9 @@ export const changePassword = async (req, res) => {
         const { password, newPassword } = req.body
         const { userId } = req.userId
 
-        const user = await user.findById(userId)
+        const user = await User.findById(userId)
 
-        const isPasswordCorrect = await bcrypt.compare(newPassword, user.password)
+        const isPasswordCorrect = await bcrypt.compare(password, user.password)
         if (!isPasswordCorrect) {
             res.status(400).json({ message: "Invalid password" })
         }

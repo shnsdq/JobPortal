@@ -12,7 +12,7 @@ export const verifyJwt = async (req,res,next) => {
            return res.status(401).json({message:"Invalid token",success:false})
         }
 
-        req.id = decoded.userId;
+        req.userId = decoded.userId;
         next();
 
     } catch (error) {

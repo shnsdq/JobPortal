@@ -8,16 +8,14 @@ import jobRoute from "./routes/job.routes.js";
 import companyRoute from './routes/company.routes.js'
 import applicationRoute from './routes/application.routes.js'
 
-dotenv.config();
+dotenv.config({});
 const app = express();
-
-dbConnect();
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 app.use(cors({
-    origin:process.env.CORS_ORIGIN,
+    origin:'http://localhost:5173',
     credentials:true
 }));
 
@@ -27,11 +25,13 @@ app.get('/',async (req,res) => {
 })
 
 //routes
-app.use('/api/user',userRoute);
-app.use('/api/job',jobRoute);
-app.use('/api/company',companyRoute);
-app.use('/api/application',applicationRoute);
+app.use('/api/v1/user',userRoute);
+app.use('/api/v1/job',jobRoute);
+app.use('/api/v1/company',companyRoute);
+app.use('/api/v1/application',applicationRoute);
 
 const PORT = process.env.PORT 
 
-app.listen(PORT,()=> console.log(`Server is listening at : ${PORT}`))
+app.listen(PORT,()=>{
+    dbConnect();
+     console.log(`Server is listening at : ${PORT}`)})
