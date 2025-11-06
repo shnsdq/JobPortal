@@ -7,9 +7,8 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 
-function Navbar() {
-    
-    const {user} = useSelector(store=>store.auth);
+const Navbar=()=> {
+    const {user} = useSelector(store => store.auth);
 
     return (
         <div className='bg-white'>
@@ -22,14 +21,14 @@ function Navbar() {
                         <li><Link to='/'>Home</Link></li>
                         <li><Link to='/jobs'>Jobs</Link></li>
                         <li><Link to='/browse'>Browse</Link></li>
-                        
+
                     </ul>
                     {
                         !user ? (
                             <div className='flex items-center gap-2'>
-                               <Link to="/login"><Button variant="outline">Login</Button></Link>
-                               <Link to="/signup"> <Button className='bg-[#3834ec] hover:bg-[#0c0b72]'>Signup</Button></Link>
-                               
+                                <Link to="/login"><Button variant="outline">Login</Button></Link>
+                                <Link to="/signup"> <Button className='bg-[#3834ec] hover:bg-[#0c0b72]'>Signup</Button></Link>
+
                             </div>
                         ) : (
                             <Popover>
