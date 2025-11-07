@@ -5,9 +5,9 @@ import jwt from "jsonwebtoken"
 
 export const register = async (req, res) => {
     try {
-        const { name, email, phoneNumber, password, role } = req.body
+        const { fullname, email, phoneNumber, password, role } = req.body
 
-        if (!name || !email || !phoneNumber || !password || !role) {
+        if (!fullname || !email || !phoneNumber || !password || !role) {
             res.status(400).json({ message: "Feild is required", success: false })
         }
 
@@ -23,7 +23,7 @@ export const register = async (req, res) => {
         const image_url = cloudImage.secure_url;
 
         User.create({
-            name,
+            fullname,
             email,
             phoneNumber,
             password: hashedPassword,
@@ -83,7 +83,7 @@ export const updateProfile = async (req, res) => {
             res.status(400).json({ message: "Invalid user" })
         }
 
-        const { name, email, phoneNumber, bio, skills } = req.body;
+        const { fullname, email, phoneNumber, bio, skills } = req.body;
 
         if (!name || !email || !phoneNumber || !bio || !skills) {
             res.status(400).json({ message: "Feild is required", success: false })
@@ -116,7 +116,7 @@ export const updateProfile = async (req, res) => {
         await user.save();
 
         const updatedUser = await User.findByIdAndUpdate(userId, {
-            name,
+            fullname,
             email,
             phoneNumber,
             bio,

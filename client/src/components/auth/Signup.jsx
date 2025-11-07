@@ -14,57 +14,58 @@ import { setLoading } from '../../redux/authSlice'
 
 function Signup() {
 
-  const [input,setInput] = useState({
-    fullname:"",
-    email:"",
-    phoneNumber:"",
-    password:"",
-    role:"",
-    file:"",
+  const [input, setInput] = useState({
+    fullname: "",
+    email: "",
+    phoneNumber: "",
+    password: "",
+    role: "",
+    file: "",
   });
-  const {loading} = useSelector(store=>store.auth);
+  const { loading } = useSelector(store => store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const changeEventHandler = (e)=>{
-     setInput({...input, [e.target.name]:e.target.value});
+  const changeEventHandler = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
   }
-  const changeFileHandler = () =>{
-    setInput({...input, file:e.target.files?.[0]});
+  const changeFileHandler = (e) => {
+    setInput({ ...input, file: e.target.files?.[0] });
   }
 
   const SubmitHandler = async (e) => {
-     e.preventDefault();
-     const formData = new formData();
-     formData.append("fullname",input.fullname)
-     formData.append("email",input.email)
-     formData.append("phoneNumber",input.phoneNumber)
-     formData.append("password",input.password)
-     formData.append("role",input.role)
-     if(input.file){
-      formData.append("file",input.file)
-     }
-         try{
-          dispatch(setLoading(true))
-           const res = await axios.post(`${USER_API_END_POINT}/register`,formData, {
-            headers:{
-              "Content-Type":"multipart/form-data"
-            },
-            withCredentials:true
-           });
-           if(res.data.success){
-            navigate("/login");
-            toast.success(res.data.message);
-           }
-         }catch(error){
-          console.log(error)
-          toast.error(error.response.data.message)
-         }finally{
-          dispatch(setLoading(false));
-         }
-  }
+    e.preventDefault();
+    const formData = new formData();
     
-    return (
+    formData.append("fullname", input.fullname)
+    formData.append("email", input.email)
+    formData.append("phoneNumber", input.phoneNumber)
+    formData.append("password", input.password)
+    formData.append("role", input.role)
+    if (input.file) {
+      formData.append("file", input.file)
+    }
+    try {
+      dispatch(setLoading(true))
+      const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        },
+        withCredentials: true
+      });
+      if (res.data.success) {
+        navigate("/login");
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error(error.response.data.message)
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
+
+  return (
     <div>
       <Navbar />
       <div className='flex items-center justify-center max-w-7xl mx-auto'>
@@ -84,7 +85,7 @@ function Signup() {
             <Label>Email</Label>
             <Input
               type="email"
-                value={input.email}
+              value={input.email}
               name="email"
               onChange={changeEventHandler}
               placeholder="patel@gmail.com"
@@ -94,7 +95,7 @@ function Signup() {
             <Label>Phone Number</Label>
             <Input
               type="text"
-                value={input.phoneNumber}
+              value={input.phoneNumber}
               name="phoneNumber"
               onChange={changeEventHandler}
               placeholder="3456987000"
@@ -104,7 +105,7 @@ function Signup() {
             <Label>Password</Label>
             <Input
               type="password"
-                value={input.password}
+              value={input.password}
               name="password"
               onChange={changeEventHandler}
               placeholder="Password"
@@ -128,7 +129,7 @@ function Signup() {
                   type="radio"
                   name="role"
                   value="recruiter"
-                   checked={input.role === 'recruiter'}
+                  checked={input.role === 'recruiter'}
                   onChange={changeEventHandler}
                   className="cursor-pointer"
                 />
@@ -137,19 +138,19 @@ function Signup() {
 
             </RadioGroup>
             <div className='flex items-center gap-2'>
-<Label>Profile</Label>
-<Input 
-accept="image/*"
-type="file"
-onChange={changeFileHandler}
-className="cursor-pointer"
-/>
+              <Label>Profile</Label>
+              <Input
+                accept="image/*"
+                type="file"
+                onChange={changeFileHandler}
+                className="cursor-pointer"
+              />
             </div>
           </div>
           {
-                      loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait </Button> : <Button type="submit" className="w-full my-4">Signup</Button>
-          
-                    }
+            loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait </Button> : <Button type="submit" className="w-full my-4">Signup</Button>
+
+          }
           <span className='text-sm'>Already have an account? <Link to="/login" className="text-blue-600">Login</Link></span>
         </form>
       </div>
