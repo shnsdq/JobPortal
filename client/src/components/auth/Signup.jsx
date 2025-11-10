@@ -29,6 +29,7 @@ function Signup() {
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   }
+  
   const changeFileHandler = (e) => {
     setInput({ ...input, file: e.target.files?.[0] });
   }
