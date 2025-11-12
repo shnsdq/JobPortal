@@ -1,4 +1,4 @@
-import React, { StrictMode, useState } from 'react'
+import React, { StrictMode, useEffect, useState } from 'react'
 import Navbar from '../shared/Navbar'
 import { Label } from '../ui/label'
 import { Button } from '../ui/button'
@@ -22,7 +22,7 @@ function Signup() {
     role: "",
     file: "",
   });
-  const { loading } = useSelector(store => store.auth);
+  const { loading,user } = useSelector(store => store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -65,6 +65,13 @@ function Signup() {
       dispatch(setLoading(false));
     }
   }
+
+   useEffect(()=>{
+    if(user){
+      navigate("/")
+    }
+    },[])
+  
 
   return (
     <div>
