@@ -8,7 +8,7 @@ const AppliedJobTable = () => {
   return (
     <div>
       <Table>
-        <TableCaption>Alist of your applied jobs </TableCaption>
+        <TableCaption>A list of your applied jobs </TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>Date</TableHead>

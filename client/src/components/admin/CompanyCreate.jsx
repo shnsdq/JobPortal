@@ -42,7 +42,6 @@ const CompanyCreate = () => {
        <h1 className='font-bold text-2xl'></h1>
         <p>What would you like to give your company name?You can change this later</p>
         </div>
-
         <Label>Company Name</Label>
         <Input
           type="text"
@@ -53,7 +52,6 @@ const CompanyCreate = () => {
         <div className='flex items-center gap-2 my-10'>
           <Button variant="outline" onClick={()=> navigate("/admin/companies")}>Cancel</Button>
           <Button onClick={registerNewCompany}>Continue</Button>
-
         </div>
       </div>
     </div>

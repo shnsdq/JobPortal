@@ -57,7 +57,7 @@ const {singleCompany} = useSelector(store=>store.company);
                 withCredentials: true
             });
             if (res.data.success) {
-                navigate("/admin/compnies");
+                navigate("/admin/companies");
                 toast.success(res.data.message);
             }
         } catch (error) {
@@ -136,12 +136,10 @@ const {singleCompany} = useSelector(store=>store.company);
                             />
                         </div>
                     </div>
-
                     {
                         loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait </Button> : <Button type="submit" className="w-full my-4">Update</Button>
 
                     }
-
                 </form>
             </div>
         </div>

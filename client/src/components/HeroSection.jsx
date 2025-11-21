@@ -34,7 +34,6 @@ const HeroSection = () => {
           </Button>
         </div>
       </div>
-
     </div>
   )
 }

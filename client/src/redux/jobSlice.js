@@ -33,5 +33,12 @@ const jobSlice = createSlice({
     }
 });
 
-export const {setAllJobs,setSingleJob,setAllAdminJobs,setSearchJobByText,setAllAppliedJobs,setSearchedQuery} = jobSlice.actions;
+export const {
+    setAllJobs,
+    setSingleJob,
+    setAllAdminJobs,
+    setSearchJobByText,
+    setAllAppliedJobs,
+    setSearchedQuery
+} = jobSlice.actions;
 export default jobSlice.reducer;

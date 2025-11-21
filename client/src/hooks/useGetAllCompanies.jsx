@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setCompanies } from '../redux/companySlice';
 
-const useGetAllCompanies = (companyId) => {
+const useGetAllCompanies = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         const fetchCompanies = async () => {

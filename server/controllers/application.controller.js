@@ -29,7 +29,7 @@ export const applyJob = async (req,res) => {
             appplicant:userId
         });
 
-        job.application.push(newApplication._id);
+        job.applications.push(newApplication._id);
         await job.save();
 
      return res.status(200).json({ success: true, message: "Job Applied successfully" })
@@ -40,7 +40,7 @@ export const applyJob = async (req,res) => {
     }
 }
 
-//student seeing thejobs he applied
+//student seeing the jobs he applied
 export const getAppliedJobs = async (req,res) => {
     try {
         const userId = req.userId;

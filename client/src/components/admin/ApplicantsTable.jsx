@@ -8,13 +8,13 @@ const shortListingStatus = ["Accepted", "Rejected"]
 const ApplicantsTable = () => {
     const { applicants } = useSelector(store => store.application);
 
-    const statusHandler = async (status,id)=> {
+    const statusHandler = async (status, id) => {
         try {
             axios.defaults.withCredentials = true;
-             const res = await axios.post(`${APPLICATION_API_END_POINT}/status/${id}/update`,{status});
-                if(res.data.success){
-                    toast.success(res.data.message)
-                }
+            const res = await axios.post(`${APPLICATION_API_END_POINT}/status/${id}/update`, { status });
+            if (res.data.success) {
+                toast.success(res.data.message)
+            }
         } catch (error) {
             toast.error(error.response.data.message)
         }
@@ -23,7 +23,7 @@ const ApplicantsTable = () => {
     return (
         <div>
             <Table>
-                <TableCaption>A list of your recent applied jobs</TableCaption>
+                <TableCaption>A list of applicants</TableCaption>
                 <TableHeader>
                     <TableRow>
                         <TableHead>FullName</TableHead>
@@ -43,39 +43,38 @@ const ApplicantsTable = () => {
                                 <TableCell>{item?.applicant?.phoneNumber}</TableCell>
                                 <TableCell >
                                     {
-                                        item?.applicant?.profile?.resume ? <a className='text-blue-600 cursor-pointer' href={item?.applicant?.profile?.resume} target="_blank" rel="noopener noreferrer">{item?.applicant?.profile?.resumeOriginalName}</a> : <span>NA</span>
+                                      item?.applicant?.profile?.resume ? <a className='text-blue-600 cursor-pointer' href={item?.applicant?.profile?.resume} target="_blank" rel="noopener noreferrer">{item?.applicant?.profile?.resumeOriginalName}</a> : <span>NA</span>
                                     }</TableCell>
                                 <TableCell>{item?.applicant?.createdAt.split("T")[0]}</TableCell>
                                 <TableCell className='text-right cursor-pointer'>
                                     <Popover>
                                         <PopoverTrigger><MoreHorizontal /></PopoverTrigger>
                                         <PopoverContent className="w-32">
-                                            <div onClick={() => navigate(`/admin/companies/${job._id}`)} className='flex items-center gap-2 w-fit cursor-pointer'>
+                                            {
+                                                shortListingStatus.map((status, index) => {
+                                                    return (
+                                                        <div onClick={() => statusHandler(status, item?._id)} key={index} className='flex w-fit items-center my-2 cursor-pointer'>
+                                                            <span>{status} </span>
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+
+                                            {/* <div onClick={() => navigate(`/admin/companies/${job._id}`)} className='flex items-center gap-2 w-fit cursor-pointer'>
                                                 <Edit2 className='w-4' />
                                                 <span>Edit</span>
                                             </div>
-                                            <div onClick={() => navigate(`/admin/jobs/${job._id / applicants}`)} className='flex items-center gap-2 w-fit cursor-pointer mt-2'>
+                                            <div onClick={() => navigate(`/admin/jobs/${job._id}/applicants`)} className='flex items-center gap-2 w-fit cursor-pointer mt-2'>
                                                 <Eye className='w-4' />
                                                 <span>Applicants</span>
-                                            </div>
+                                            </div> */}
                                         </PopoverContent>
                                     </Popover>
-                                    {
-                                        shortListingStatus.map((status, index) => {
-                                            return (
-                                                <div onClick={()=> statusHandler(status,item?._id)} key={index} className='flex w-fit items-center my-2 cursor-pointer'>
-                                                    <span>{status} </span>
-                                                </div>
-                                            )
-                                        })
-                                    }
-
                                 </TableCell>
                             </tr>
                         ))
                     }
                 </TableBody>
-
             </Table>
         </div>
     )

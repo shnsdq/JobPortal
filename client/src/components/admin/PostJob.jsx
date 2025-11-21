@@ -15,7 +15,7 @@ const PostJob = () => {
     const [input, setInput] = useState({
         title: "",
         description: "",
-        requirement: "",
+        requirements: "",
         salary: "",
         location: "",
         jobType: "",
@@ -41,7 +41,7 @@ const PostJob = () => {
 
         try {
             setLoading(true)
-            const res = await axios.post(`${JOB_API_END_POINT_API_END_POINT}/post`, input, {
+            const res = await axios.post(`${JOB_API_END_POINT}/post`, input, {
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -159,7 +159,6 @@ const PostJob = () => {
                                                     )
                                                 })
                                             }
-
                                         </SelectGroup>
                                     </SelectContent>
                                 </Select>

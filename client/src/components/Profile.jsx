@@ -9,6 +9,7 @@ import AppliedJobTable from './AppliedJobTable'
 import UpdateProfileDialogue from './UpdateProfileDialogue'
 import { useSelector } from 'react-redux'
 import useGetAppliedJobs from '../hooks/useGetAppliedJobs'
+import { useNavigate } from 'react-router-dom'
 
 //const skills = ["HTML","Css","Javascript"]
 const isResume = true;
@@ -17,6 +18,14 @@ const Profile = () => {
   useGetAppliedJobs();
 const [open,setOpen] = useState(false)
 const {user} = useSelector(store=>store.auth)
+ const navigate = useNavigate();
+   
+ // protect route
+    useEffect(() => {
+        if (!user) {
+            navigate("/");
+        }
+    }, []);
 
   return (
     <div>
@@ -25,7 +34,7 @@ const {user} = useSelector(store=>store.auth)
         <div className='flex justify-items'>
           <div className='flex items-center gap-4'>
             <Avatar className="h-24 w-24" >
-              <AvatarImage src="8QAMhEAAgIBBAECBQEHBQEAAAAAAAECAwQREiExQQUTIjJRYaGxFCNCcYGRwRVD0eHwM" alt="profile" />
+              <AvatarImage src= {user?.profile?.profilePhoto} alt="profile" />
             </Avatar>
             <div>
               <h1 className='font-medium text-xl'>{user?.fullname} </h1>

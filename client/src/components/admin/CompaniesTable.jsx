@@ -55,14 +55,9 @@ const CompaniesTable = () => {
                                         </PopoverContent>
                                     </Popover>
                                 </TableCell>
-
-
                             </tr>
-
-
                         ))
                     }
-
                 </TableBody>
             </Table>
         </div>
