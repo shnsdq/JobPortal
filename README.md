@@ -1,13 +1,10 @@
-
 **Job Portal Web Application**
 
-Developed a full-stack job portal platform enabling job seekers to apply for positions and recruiters to post/manage job listings.
+Developed a full-featured **job portal web app** using **MongoDB, Express.js, React.js, and Node.js (MERN stack)**, enabling recruiters to post and manage jobs while applicants can browse and apply seamlessly.
 
-* Built RESTful APIs using **Node.js** and **Express** for authentication, job postings, and applications.
-* Implemented secure **JWT-based authentication** with role-based access (job seekers & recruiters).
-* Integrated **MongoDB** for efficient data storage of users, job postings, and applications.
-* Used **Multer** for handling file uploads such as resumes and profile pictures.
-* Configured **Cloudinary** for cloud-based storage and optimized retrieval of user-uploaded files.
-* Designed APIs to support features like profile management, job search 
-
+* Implemented **JWT-based authentication** with secure role-based access for recruiters and job seekers.
+* Designed **RESTful APIs** using **Node.js** and **Express** for efficient job and user management.
+* Integrated **Multer** and **Cloudinary** for uploading and storing resumes and profile images securely in the cloud.
+* Built a responsive **frontend** using **React.js**, **HTML**, **Tailwind CSS**, and **shadcn/ui**, ensuring a modern and intuitive user experience.
+* Optimized performance with **Axios-based API calls** and efficient **MongoDB data models** for fast data retrieval.
 
