@@ -23,7 +23,7 @@ function Login() {
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loading,user } = useSelector(store => store.auth);
+  const { loading, user } = useSelector(store => store.auth);
 
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -52,11 +52,11 @@ function Login() {
     }
   }
 
-  useEffect(()=>{
-  if(user){
-    navigate("/")
-  }
-  },[])
+  useEffect(() => {
+    if (user) {
+      navigate("/")
+    }
+  }, [])
 
   return (
     <div>
