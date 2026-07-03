@@ -5,11 +5,13 @@ import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { RadioGroup } from '../ui/radio-group'
 import { Link, useNavigate } from 'react-router-dom'
-import { USER_API_END_POINT } from '../../utils/constant'
+import { USER_API_END_POINT } from '../../utils/constant.js'
 import { toast } from 'sonner'
 import { useDispatch, useSelector } from 'react-redux'
 import store from '../../redux/store'
-import { setLoading } from '../../redux/authSlice'
+import { setLoading } from '@/redux/authSlice'
+import { Loader2 } from 'lucide-react'
+import axios from 'axios'
 
 
 function Signup() {
@@ -36,7 +38,8 @@ function Signup() {
 
   const SubmitHandler = async (e) => {
     e.preventDefault();
-    const formData = new formData();
+
+    const formData = new FormData();
     
     formData.append("fullname", input.fullname)
     formData.append("email", input.email)

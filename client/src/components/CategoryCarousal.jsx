@@ -14,13 +14,14 @@ const category = [
 ]
 
 const CategoryCarousal = () => {
- const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
-     const searchJobHandler = (cat) => {
+  const searchJobHandler = (cat) => {
         dispatch(setSearchedQuery(cat));
         navigate("/browse");
       }
+
     return (
         <div>
             <Carousel className='w-full max-w-xl mx-auto my-20'>

@@ -7,8 +7,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUser } from '../../redux/authSlice'
 
-
 const Navbar = () => {
+    
     const { user } = useSelector(store => store.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -27,6 +27,7 @@ const Navbar = () => {
             toast.error(error.response.data.message)
         }
     }
+
     return (
         <div className='bg-white'>
             <div className='flex items-center justify-between mx-auto max-w-7xl h-16 '>
