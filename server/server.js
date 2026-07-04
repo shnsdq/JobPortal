@@ -32,6 +32,6 @@ app.use('/api/v1/application',applicationRoute);
 
 const PORT = process.env.PORT || 3000
 
-app.listen(PORT,()=>{
+app.listen(PORT, "0.0.0.0",()=>{
     dbConnect();
      console.log(`Server is listening at : ${PORT}`)})

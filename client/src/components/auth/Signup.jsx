@@ -63,7 +63,8 @@ function Signup() {
       }
     } catch (error) {
       console.log(error)
-      toast.error(error.response.data.message)
+      const errMsg = error.response?.data?.message || "Server Connection failed";
+      toast.error(errMsg)
     } finally {
       dispatch(setLoading(false));
     }
@@ -122,7 +123,7 @@ function Signup() {
               placeholder="Password"
             />
           </div>
-          <div className='flex items-center justify-between'>
+          <div className='flex items-center justify-between gap-4'>
             <RadioGroup className='flex items-center gap-4 my-5'>
               <div className="flex items-center space-x-2">
                 <Input
@@ -149,17 +150,17 @@ function Signup() {
 
             </RadioGroup>
             <div className='flex items-center gap-2'>
-              <Label>Profile</Label>
+              <Label>Profile Picture</Label>
               <Input
                 accept="image/*"
                 type="file"
                 onChange={changeFileHandler}
-                className="cursor-pointer"
+                className="cursor-pointer p-2 rounded-md"
               />
             </div>
-          </div>
+           </div>
           {
-            loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait </Button> : <Button type="submit" className="w-full my-4">Signup</Button>
+            loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait </Button> : <Button type="submit" className="bg-gray-200 rounded-md cursor-pointer w-full my-4">Signup</Button>
 
           }
           <span className='text-sm'>Already have an account? <Link to="/login" className="text-blue-600">Login</Link></span>

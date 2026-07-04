@@ -2,6 +2,7 @@ import { User } from "../models/user.model.js";
 import bcrypt from "bcryptjs"
 import cloudinary from "../utils/cloudinary.js";
 import jwt from "jsonwebtoken"
+import getDataUri from "../utils/datauri.js";
 
 export const register = async (req, res) => {
     try {
@@ -13,14 +14,26 @@ export const register = async (req, res) => {
 
         const user = await User.findOne({ email })
         if (user) {
-            res.status(400).json({ message: "User already exists" })
+            res.status(400).json({ message: "User already exists",
+                success:false
+             })
         }
 
-        const hashedPassword = await bcrypt.hashPassword(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-        const file = req.file.image;
-        const cloudImage = await cloudinary.uploader.upload(file.path)
-        const image_url = cloudImage.secure_url;
+        const file = req.file;
+        let fileUri = null;
+
+        if(file){
+
+            fileUri = getDataUri(file);
+        }
+
+        let cloudResponse = null;
+        if(fileUri){
+
+            cloudResponse = await cloudinary.uploader.upload(fileUri.content)
+        }
 
         User.create({
             fullname,
@@ -29,11 +42,11 @@ export const register = async (req, res) => {
             password: hashedPassword,
             role,
             profile: {
-                profilePic: image_url
+                profilePic: cloudResponse?.secure_url
             }
         })
 
-        return res.status(200).json({ success: true, message: "Account created successfully" })
+        return res.status(201).json({ success: true, message: "Account created successfully" })
     } catch (error) {
         console.log(error)
     }
@@ -92,12 +105,13 @@ export const updateProfile = async (req, res) => {
         let skillsArray;
         skillsArray = skills.split(',');
 
-        if (skills) {
-            user.skills = skillsArray;
-        }
+        // if (skills) {
+        //     user.skills = skillsArray;
+        // }
 
-        const resume = req.file.resume;
-        const cloudResponse = await cloudinary.uploader.upload(resume.path)
+        const file = req.file;
+        const fileUri = getDataUri(file);
+        const cloudResponse = await cloudinary.uploader.upload(fileUri.content)
         const resumeUrl = cloudResponse.secure_url;
 
         if (cloudResponse) {
@@ -105,13 +119,13 @@ export const updateProfile = async (req, res) => {
             user.profile.resumeOriginalName = resume.originalname;
         }
 
-        const Image = req.file.image;
-        const cloudImage = await cloudinary.uploader.upload(Image.path)
-        const ImageUrl = cloudImage.secure_url;
+        // const Image = req.file.image;
+        // const cloudImage = await cloudinary.uploader.upload(Image.path)
+        // const ImageUrl = cloudImage.secure_url;
 
-        if (cloudImage) {
-            user.profile.profilePhoto = ImageUrl
-        }
+        // if (cloudImage) {
+        //     user.profile.profilePhoto = ImageUrl
+        // }
 
         await user.save();
 
@@ -132,28 +146,3 @@ export const updateProfile = async (req, res) => {
         return res.status(500).json({ success: false, message: "Server Error" })
     }
 }
-
-export const changePassword = async (req, res) => {
-    try {
-        const { password, newPassword } = req.body
-        const { userId } = req.userId
-
-        const user = await User.findById(userId)
-
-        const isPasswordCorrect = await bcrypt.compare(password, user.password)
-        if (!isPasswordCorrect) {
-            res.status(400).json({ message: "Invalid password" })
-        }
-
-        const hashedPassword = await bcrypt.hashPassword(newPassword, 10);
-
-        user.password = hashedPassword;
-        await user.save({ validateBeforeSave: false });
-
-        return res.status(201).json({ success: true, message: "Password Updated Successfully" })
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json({ success: false, message: "Server Error" })
-    }
-}
-
