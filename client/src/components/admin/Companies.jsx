@@ -29,7 +29,7 @@ dispatch(setsearchCompanyByText(input));
                         placeholder="Filter by name"
                         onChange={(e)=>setInput(e.target.value)}
                     />
-                    <Button onClick={()=> navigate('/admin/companies/create') }>New Company</Button>
+                    <Button onClick={()=> navigate('/admin/companies/create')} className='bg-[#3834ec] hover:bg-[#0c0b72] cursor-pointer '>New Company</Button>
                 </div>
                 <CompaniesTable/>
             </div>

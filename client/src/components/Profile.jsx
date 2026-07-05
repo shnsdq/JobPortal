@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './shared/Navbar'
 import { Avatar, AvatarImage } from './ui/avatar'
-import { Contact, Pen } from 'lucide-react'
+import { Contact, Mail, Pen } from 'lucide-react'
 import { Button } from './ui/button'
 import { Badge } from './ui/badge'
 import { Label } from './ui/label'
@@ -34,7 +34,7 @@ const {user} = useSelector(store=>store.auth)
         <div className='flex justify-items'>
           <div className='flex items-center gap-4'>
             <Avatar className="h-24 w-24" >
-              <AvatarImage src= {user?.profile?.profilePhoto} alt="profile" />
+              <AvatarImage src={user?.profile?.profilePhoto ? user?.profile?.profilePhoto : "/src/assets/profile.jpg"} alt="profile" />
             </Avatar>
             <div>
               <h1 className='font-medium text-xl'>{user?.fullname} </h1>

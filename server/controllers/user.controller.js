@@ -12,8 +12,8 @@ export const register = async (req, res) => {
             res.status(400).json({ message: "Feild is required", success: false })
         }
 
-        const user = await User.findOne({ email })
-        if (user) {
+        const exists = await User.findOne({ email })
+        if (exists) {
             res.status(400).json({ message: "User already exists",
                 success:false
              })
@@ -25,17 +25,15 @@ export const register = async (req, res) => {
         let fileUri = null;
 
         if(file){
-
             fileUri = getDataUri(file);
         }
 
         let cloudResponse = null;
         if(fileUri){
-
             cloudResponse = await cloudinary.uploader.upload(fileUri.content)
         }
 
-        User.create({
+       const newUser = new User({
             fullname,
             email,
             phoneNumber,
@@ -46,7 +44,14 @@ export const register = async (req, res) => {
             }
         })
 
-        return res.status(201).json({ success: true, message: "Account created successfully" })
+        const user = await newUser.save();
+
+        const tokenData = { userId: user._id }
+
+        const token = jwt.sign(tokenData, process.env.TOKEN_KEY, { expiresIn: "1d" })
+
+        return res.status(201).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpsOnly: true, sameSite: 'strict' }).json({ success: true,user, message: "Account created successfully" })
+
     } catch (error) {
         console.log(error)
     }
@@ -73,7 +78,7 @@ export const login = async (req, res) => {
 
         const token = jwt.sign(tokenData, process.env.TOKEN_KEY, { expiresIn: "1d" })
 
-        res.status(201).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpsOnly: true, sameSite: Strict }).json({ message: `Welcome back ${user.name}`, success: true, user })
+        res.status(201).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpsOnly: true, sameSite: 'strict' }).json({ message: `Welcome back ${user.fullname}`, success: true, user })
 
     } catch (error) {
         console.log(error)
@@ -91,53 +96,61 @@ export const logout = async (req, res) => {
 export const updateProfile = async (req, res) => {
     try {
         const userId = req.userId;
-        const user = await User.findById({ userId })
+        const user = await User.findById(userId)
         if (!user) {
             res.status(400).json({ message: "Invalid user" })
         }
 
         const { fullname, email, phoneNumber, bio, skills } = req.body;
 
-        if (!name || !email || !phoneNumber || !bio || !skills) {
-            res.status(400).json({ message: "Feild is required", success: false })
+        if (!fullname || !email || !phoneNumber || !bio || !skills) {
+            res.status(400).json({ message: "Field is required", success: false })
         }
 
+         const file = req.file;
+        let fileUri = null;
+
+        if(file){
+            fileUri = getDataUri(file);
+        }
+
+        let cloudResponse = null;
+        if(fileUri){
+            cloudResponse = await cloudinary.uploader.upload(fileUri.content)
+        }
+
+        
         let skillsArray;
-        skillsArray = skills.split(',');
-
-        // if (skills) {
-        //     user.skills = skillsArray;
-        // }
-
-        const file = req.file;
-        const fileUri = getDataUri(file);
-        const cloudResponse = await cloudinary.uploader.upload(fileUri.content)
-        const resumeUrl = cloudResponse.secure_url;
-
-        if (cloudResponse) {
-            user.profile.resume = resumeUrl
-            user.profile.resumeOriginalName = resume.originalname;
+        if(skills){
+            skillsArray = skills.split(",");
         }
+       
+        // updating data
+        if(fullname) user.fullname = fullname
+        if(email) user.email = email
+        if(phoneNumber)  user.phoneNumber = phoneNumber
 
-        // const Image = req.file.image;
-        // const cloudImage = await cloudinary.uploader.upload(Image.path)
-        // const ImageUrl = cloudImage.secure_url;
+         if (!user.profile) user.profile = {};
+        if(bio) user.profile.bio = bio
+        if(skills) user.profile.skills = skillsArray
 
-        // if (cloudImage) {
-        //     user.profile.profilePhoto = ImageUrl
-        // }
+    
+        // resume comes later here...
+        if(cloudResponse){
+            user.profile.resume = cloudResponse.secure_url // save the cloudinary url
+            user.profile.resumeOriginalName = file.originalname // Save the original file name
+        }
 
         await user.save();
 
-        const updatedUser = await User.findByIdAndUpdate(userId, {
-            fullname,
-            email,
-            phoneNumber,
-            bio,
-            skills: skillsArray,
-            profile
-        },
-            { new: true })
+       const updatedUser = {
+            _id: user._id,
+            fullname: user.fullname,
+            email: user.email,
+            phoneNumber: user.phoneNumber,
+            role: user.role,
+            profile: user.profile
+        }
 
         return res.status(201).json({ success: true, message: "Updated Successfully", updatedUser })
 

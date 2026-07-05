@@ -9,7 +9,7 @@ import { USER_API_END_POINT } from '../../utils/constant.js'
 import { toast } from 'sonner'
 import { useDispatch, useSelector } from 'react-redux'
 import store from '../../redux/store'
-import { setLoading } from '@/redux/authSlice'
+import { setLoading,setUser } from '@/redux/authSlice'
 import { Loader2 } from 'lucide-react'
 import axios from 'axios'
 
@@ -58,7 +58,8 @@ function Signup() {
         withCredentials: true
       });
       if (res.data.success) {
-        navigate("/login");
+        dispatch(setUser(res.data.user));
+        navigate("/");
         toast.success(res.data.message);
       }
     } catch (error) {
@@ -74,7 +75,7 @@ function Signup() {
     if(user){
       navigate("/")
     }
-    },[])
+    },[user])
   
 
   return (

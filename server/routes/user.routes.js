@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/register', upload.single("file"), register);
 router.post('/login', login);
 router.get('/logout', logout);
-router.patch('/updateProfile', verifyJwt,upload.single("file"), updateProfile);
+router.post('/updateProfile', verifyJwt,upload.single("file"), updateProfile);
 
 
 export default router;

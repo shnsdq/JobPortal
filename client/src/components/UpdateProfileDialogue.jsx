@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from './ui/dialog'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from './ui/dialog'
 import { Label } from './ui/label'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
 import { Loader2 } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUser } from '../redux/authSlice'
+import axios from 'axios'
+import { USER_API_END_POINT } from '../utils/constant'
+import { toast } from 'sonner'
 
 
 const UpdateProfileDialogue = ({ open, setOpen }) => {
@@ -27,13 +30,13 @@ const UpdateProfileDialogue = ({ open, setOpen }) => {
         setInput({ ...input, [e.target.name]: e.target.value })
     }
 
-    const fileChangeHandler = () => {
+    const fileChangeHandler = (e) => {
         setInput({ ...input, file: e.target.files?.[0] });
     }
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        const formData = new formData();
+        const formData = new FormData();
         formData.append("fullname", input.fullname)
         formData.append("email", input.email)
         formData.append("phoneNumber", input.phoneNumber)
@@ -45,7 +48,7 @@ const UpdateProfileDialogue = ({ open, setOpen }) => {
 
         try {
             setLoading(true)
-            const res = await axios.post(`${USER_API_END_POINT}/profile/update`, formData, {
+            const res = await axios.post(`${USER_API_END_POINT}/updateProfile`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 },
@@ -67,25 +70,26 @@ const UpdateProfileDialogue = ({ open, setOpen }) => {
     return (
         <div>
             <Dialog open={open}>
-                <DialogContent className="sm:max-w-[425px]" onIntereactOutside={() => setOpen(false)} >
+                <DialogContent className="sm:max-w-[425px] bg-gray-200 text-gray-900" onIntereactOutside={() => setOpen(false)} >
                     <DialogHeader>
                         <DialogTitle>Update Profile</DialogTitle>
+                        <DialogDescription>Update your profile information</DialogDescription>
                     </DialogHeader>
                     <form onSubmit={submitHandler}>
                         <div className='grid gap-4 py-4'>
                             <div className='grid grid-cols-4 items-center gap-4'>
-                                <Label htmlfor="name" className="text-right">Name</Label>
+                                <Label htmlFor="name" className="text-right">Name</Label>
                                 <Input
                                     id="name"
                                     name="name"
                                     type="text"
                                     value={input.fullname}
                                     onChange={changeEventHandler}
-                                    className='col-span-3'
+                                    className='col-span-3 '
                                 />
                             </div>
                             <div className='grid grid-cols-4 items-center gap-4'>
-                                <Label htmlfor="email" className="text-right">Email</Label>
+                                <Label htmlFor="email" className="text-right">Email</Label>
                                 <Input
                                     id="email"
                                     name="email"
@@ -96,7 +100,7 @@ const UpdateProfileDialogue = ({ open, setOpen }) => {
                                 />
                             </div>
                             <div className='grid grid-cols-4 items-center gap-4'>
-                                <Label htmlfor="number" className="text-right">Number</Label>
+                                <Label htmlFor="number" className="text-right">Number</Label>
                                 <Input
                                     id="number"
                                     name="number"
@@ -106,7 +110,7 @@ const UpdateProfileDialogue = ({ open, setOpen }) => {
                                 />
                             </div>
                             <div className='grid grid-cols-4 items-center gap-4'>
-                                <Label htmlfor="bio" className="text-right">Bio</Label>
+                                <Label htmlFor="bio" className="text-right">Bio</Label>
                                 <Input
                                     id="bio"
                                     name="bio"
@@ -116,7 +120,7 @@ const UpdateProfileDialogue = ({ open, setOpen }) => {
                                 />
                             </div>
                             <div className='grid grid-cols-4 items-center gap-4'>
-                                <Label htmlfor="skills" className="text-right">Skills</Label>
+                                <Label htmlFor="skills" className="text-right">Skills</Label>
                                 <Input
                                     id="skills"
                                     name="skills"
@@ -126,7 +130,7 @@ const UpdateProfileDialogue = ({ open, setOpen }) => {
                                 />
                             </div>
                             <div className='grid grid-cols-4 items-center gap-4'>
-                                <Label htmlfor="file" className="text-right">Resume</Label>
+                                <Label htmlFor="file" className="text-right">Resume</Label>
                                 <Input
                                     id="file"
                                     name="file"
@@ -139,7 +143,7 @@ const UpdateProfileDialogue = ({ open, setOpen }) => {
                         </div>
                         <DialogFooter>
                             {
-                                loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait </Button> : <Button type="submit" className="w-full my-4">Update</Button>
+                                loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait </Button> : <Button type="submit" className="cursor-pointer bg-gray-300 w-full my-4">Update</Button>
                             }
                         </DialogFooter>
                     </form>

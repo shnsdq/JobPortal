@@ -6,8 +6,8 @@ import { upload } from "../middleware/multer.js";
 const router = express.Router();
 
 router.post('/register',verifyJwt,registerCompany);
+router.get('/get',verifyJwt,getCompany);
+router.get('/get/:id',verifyJwt,getCompanyById);
 router.put('/update/:id',verifyJwt,upload.single('file'),updateCompany);
-router.get('/getcompany',verifyJwt,getCompany);
-router.get('/getcompany/:id',verifyJwt,getCompanyById);
 
 export default router;

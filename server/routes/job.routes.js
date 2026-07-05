@@ -4,9 +4,9 @@ import { verifyJwt } from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.post('/postjob',verifyJwt,jobPost);
-router.get('/all',verifyJwt,getAllJobs);
-router.get('/:id',verifyJwt,getJobById);
+router.post('/post',verifyJwt,jobPost);
+router.get('/get',verifyJwt,getAllJobs);
 router.get('/getrecruiterjob',verifyJwt,getJobByRecuriter);
+router.get('/get/:id',verifyJwt,getJobById);
 
 export default router;

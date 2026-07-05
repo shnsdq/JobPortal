@@ -39,14 +39,16 @@ export const jobPost = async (req,res) => {
 
 export const getAllJobs = async (req,res) => {
     try {
-        const keyword = req.query.keyword || "";
+        const keyword = req.query.keyword || "" ;
 
-        const query = {
+        const query = keyword
+        ? {
             $or:[
                 {title:{ $regex: keyword, $options: "i"}},
                 {description:{ $regex: keyword, $options: "i"}},
             ]
         }
+        : {}; // Return all jobs if no keyword is provided
 
         const jobs = await Job.find(query).populate({path:"company"}).sort({createdAt:-1});
         if(!jobs)

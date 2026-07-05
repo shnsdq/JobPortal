@@ -39,7 +39,7 @@ const {singleCompany} = useSelector(store=>store.company);
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        const formData = new formData();
+        const formData = new FormData();
 
         formData.append("name", input.name)
         formData.append("description", input.description)
