@@ -17,12 +17,12 @@ export const registerCompany = async (req,res) => {
 
         const userId = req.userId;
 
-     Company.create({
+     const newCompany = await Company.create({
             name:companyName,
             userId:userId
         })
 
-        res.status(201).json({ message: "Company registered", success: true })
+        res.status(201).json({ message: "Company registered", success: true, company:newCompany })
 
     } catch (error) {
          console.log(error)
@@ -35,12 +35,27 @@ export const updateCompany = async (req,res) => {
         const {name,description,website,location} = req.body;
         const companyId = req.params.id;
 
-        const file = req.file;
-        const fileUri = getDataUri(file);
-         const cloudResponse = await cloudinary.uploader.upload(fileUri.content)
-        const logo = cloudResponse.secure_url;
+         const file = req.file;
+                let fileUri = null;
+        
+                if(file){
+                    fileUri = getDataUri(file);
+                }
+        
+                let cloudResponse = null;
+                if(fileUri){
+                    cloudResponse = await cloudinary.uploader.upload(fileUri.content)
+                    
+                }
+        
 
-        const updateData = { name, description, website, location, logo };
+        const updateData = {
+             name,
+            description,
+            website,
+            location,
+            logo: cloudResponse?.secure_url
+        }
 
         const company = await Company.findByIdAndUpdate(companyId, updateData, {new:true})
 

@@ -8,6 +8,8 @@ import axios from 'axios'
 import { JOB_API_END_POINT } from '../../utils/constant'
 import { useNavigate } from 'react-router-dom'
 import { Loader2 } from 'lucide-react'
+import { useSelector } from 'react-redux'
+import { toast } from 'sonner'
 
 const companyArray = [];
 
@@ -145,17 +147,18 @@ const PostJob = () => {
                             />
                         </div>
                         {
-                            companies.length <= 0 && (
-                                <Select onValueChange={selectChangeHandler}>
+                            companies.length > 0 && (
+                                <Select className='bg-gray-200' onValueChange={selectChangeHandler}>
                                     <SelectTrigger className="w-[180px]">
-                                        <SelectValue placeholder="Select a fruit" />
+                                        <SelectValue placeholder="Select a Company" />
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectGroup>
                                             {
-                                                companies.map((company) => {
+                                                companies.map((company,index) => {
                                                     return (
-                                                        <SelectItem value={company?.name.toLowerCase()}>{company?.name}</SelectItem>
+                                                        <SelectItem key={index} value={company?.name?.toLowerCase()}>{company?.name}
+                                                        </SelectItem>
                                                     )
                                                 })
                                             }
@@ -166,7 +169,7 @@ const PostJob = () => {
                         }
                     </div>
                     {
-                        loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait </Button> : <Button type="submit" className="w-full my-4">Post New Job</Button>
+                        loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait </Button> : <Button type="submit" className="w-full my-4 ">Post New Job</Button>
                     }
                     {
                         companies.length === 0 && <p className='text-xl text-red-600 font-bold text-center my-3'> *Please register a company first,before posting a job</p>

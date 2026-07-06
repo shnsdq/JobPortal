@@ -14,7 +14,8 @@ import useGetCompanyById from '../../hooks/useGetCompanyById'
 
 const CompanySetup = () => {
     const params = useParams();
-    useGetCompanyById(params.id);
+    const companyId= params.id;
+    useGetCompanyById(companyId);
 
     const [input, setInput] = useState({
         name: "",
@@ -24,7 +25,7 @@ const CompanySetup = () => {
         file: null
     });
 
-const {singleCompany} = useSelector(store=>store.company);
+    const { singleCompany } = useSelector(store => store.company);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
 
@@ -33,7 +34,7 @@ const {singleCompany} = useSelector(store=>store.company);
     }
 
     const changeFileHandler = (e) => {
-        setInput({ ...input, file: e.target.files?.[0] });
+        setInput({ ...input, file: e.target.file?.[0] });
     }
 
 
@@ -70,13 +71,13 @@ const {singleCompany} = useSelector(store=>store.company);
 
     useEffect(() => {
         setInput({
-            name: singleCompany.name || "",
-            description: singleCompany.description ||"",
-            website:singleCompany.website || "",
-            location: singleCompany.location ||"",
-            file:singleCompany.file || null
+            name: singleCompany?.name || "",
+            description: singleCompany?.description || "",
+            website: singleCompany?.website || "",
+            location: singleCompany?.location || "",
+            file: singleCompany?.file || null
         })
-    },[singleCompany])
+    }, [singleCompany])
 
     return (
         <div>
@@ -84,7 +85,7 @@ const {singleCompany} = useSelector(store=>store.company);
             <div className='max-w-xl mx-automy-10'>
                 <form onSubmit={submitHandler}>
                     <div className='flex items-center gap-5 p-8'>
-                        <Button onclick={() => navigate("/admin/companies")} variant="outline" className='flex items-center gap-2 text-gray-500 font-semibold'>
+                        <Button onClick={() => navigate("/admin/companies")} variant="outline" className='flex items-center gap-2 text-gray-500 font-semibold'>
                             <ArrowLeft />
                             <span>Back</span>
                         </Button>
@@ -131,13 +132,14 @@ const {singleCompany} = useSelector(store=>store.company);
                             <Label>Logo</Label>
                             <Input
                                 type="file"
+                                name="file"
                                 accept="image/*"
                                 onChange={changeFileHandler}
                             />
                         </div>
                     </div>
                     {
-                        loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait </Button> : <Button type="submit" className="w-full my-4">Update</Button>
+                        loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait </Button> : <Button type="submit" className="w-full my-4 bg-blue-200 text-white cursor-pointer">Update</Button>
 
                     }
                 </form>

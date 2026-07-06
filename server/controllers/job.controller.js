@@ -2,8 +2,8 @@ import {Job} from "../models/job.model.js"
 
 export const jobPost = async (req,res) => {
     try {
-        const {title, description,requirements, salary,location,jobType,experienceLevel,position,companyId } = req.body;
-        if(!title || !description ||!requirements || !salary ||!location ||!jobType || !experienceLevel ||!position || !companyId ){
+        const {title, description,requirements, salary,location,jobType,experience,position,companyId } = req.body;
+        if(!title || !description ||!requirements || !salary ||!location ||!jobType || !experience ||!position || !companyId ){
             res.status(400).json({ message: "Feild is required", success: false })
         }
 
@@ -16,7 +16,7 @@ export const jobPost = async (req,res) => {
         salary:Number(salary),
         location,
         jobType,
-        experienceLevel,
+        experienceLevel:experience,
         position,
         company:companyId,
         createdBy:userId
@@ -30,8 +30,8 @@ export const jobPost = async (req,res) => {
 
     } catch (error) {
         console.log(error)
-       return res.status(400).json({
-         message: "Job creation failed", 
+       return res.status(500).json({
+         message:error.message, 
          success: false,
          })     
     }
@@ -86,10 +86,11 @@ export const getJobByRecuriter = async (req,res) => {
     try {
         const userId = req.userId;
 
-        const jobs = await Job.findById({createdBy : userId}).populate('company').sort({createdAt:-1})
+        const jobs = await Job.find({createdBy : userId}).populate('company').sort({createdAt:-1})
 
-        if(!jobs)
-        return res.status(400).json({ message: " No Job created ", success: false })     
+        if(!jobs || jobs.length === 0){
+            return res.status(200).json({ message: " No Job created ",jobs: [], success: true })
+        }
 
         return res.status(201).json({ jobs, success: true })     
 

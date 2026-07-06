@@ -6,6 +6,7 @@ import { setCompanies } from '../redux/companySlice';
 
 const useGetAllCompanies = () => {
     const dispatch = useDispatch();
+    
     useEffect(() => {
         const fetchCompanies = async () => {
             try {

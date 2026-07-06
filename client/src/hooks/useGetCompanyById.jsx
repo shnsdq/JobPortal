@@ -6,6 +6,7 @@ import { setSingleCompany } from '../redux/companySlice';
 
 const useGetCompanyById = (companyId) => {
     const dispatch = useDispatch();
+    
     useEffect(() => {
         const fetchSingleCompany = async () => {
             try {

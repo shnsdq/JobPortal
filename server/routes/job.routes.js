@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/post',verifyJwt,jobPost);
 router.get('/get',verifyJwt,getAllJobs);
-router.get('/getrecruiterjob',verifyJwt,getJobByRecuriter);
+router.get('/getadminjobs',verifyJwt,getJobByRecuriter);
 router.get('/get/:id',verifyJwt,getJobById);
 
 export default router;

@@ -29,7 +29,7 @@ dispatch(setSearchJobByText(input));
                         placeholder="Filter by name, role"
                         onChange={(e)=>setInput(e.target.value)}
                     />
-                    <Button onClick={()=> navigate('/admin/jobs/create') }> New Job</Button>
+                    <Button className='bg-blue-500 hover:bg-blue-600 cursor-pointer' onClick={()=> navigate('/admin/jobs/create') }> New Job</Button>
                 </div>
                 <AdminJobsTable/>
             </div>
