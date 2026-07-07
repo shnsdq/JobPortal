@@ -26,6 +26,7 @@ const CompanySetup = () => {
     });
 
     const { singleCompany } = useSelector(store => store.company);
+
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
 
@@ -82,7 +83,7 @@ const CompanySetup = () => {
     return (
         <div>
             <Navbar />
-            <div className='max-w-xl mx-automy-10'>
+            <div className='max-w-xl mx-auto my-10'>
                 <form onSubmit={submitHandler}>
                     <div className='flex items-center gap-5 p-8'>
                         <Button onClick={() => navigate("/admin/companies")} variant="outline" className='flex items-center gap-2 text-gray-500 font-semibold'>
@@ -139,7 +140,7 @@ const CompanySetup = () => {
                         </div>
                     </div>
                     {
-                        loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait </Button> : <Button type="submit" className="w-full my-4 bg-blue-200 text-white cursor-pointer">Update</Button>
+                        loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait </Button> : <Button type="submit" className=' w-full my-4 bg-black text-white cursor-pointer'>Update</Button>
 
                     }
                 </form>

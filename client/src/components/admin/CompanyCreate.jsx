@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux'
 import { setSingleCompany } from '../../redux/companySlice'
 
 const CompanyCreate = () => {
-  
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -33,11 +33,11 @@ const CompanyCreate = () => {
         toast.success(res.data.message);
 
         const companyId = res?.data?.company?._id || res?.data?._id;
-        if(companyId) {
-        navigate(`/admin/companies/${companyId}`);
-      }else{
-        console.error("Company ID not found in response:", res.data);
-      }
+        if (companyId) {
+          navigate(`/admin/companies/${companyId}`);
+        } else {
+          console.error("Company ID not found in response:", res.data);
+        }
       }
 
     } catch (error) {
@@ -45,7 +45,7 @@ const CompanyCreate = () => {
       toast.error(error?.response?.data?.message || "Something went wrong");
     }
   }
-  
+
   return (
     <div>
       <Navbar />

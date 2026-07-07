@@ -9,14 +9,16 @@ import { useDispatch } from 'react-redux'
 import { setsearchCompanyByText } from '../../redux/companySlice'
 
 const Companies = () => {
+   
     useGetAllCompanies();
-    const [input,setInput] = useState("");
+
+    const [input, setInput] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    
-useEffect(()=>{
-dispatch(setsearchCompanyByText(input));
-},[input]);
+
+    useEffect(() => {
+        dispatch(setsearchCompanyByText(input));
+    }, [input]);
 
     return (
         <div>
@@ -27,11 +29,11 @@ dispatch(setsearchCompanyByText(input));
                     <Input
                         className='w-fit'
                         placeholder="Filter by name"
-                        onChange={(e)=>setInput(e.target.value)}
+                        onChange={(e) => setInput(e.target.value)}
                     />
-                    <Button onClick={()=> navigate('/admin/companies/create')} className='bg-[#3834ec] hover:bg-[#0c0b72] cursor-pointer '>New Company</Button>
+                    <Button onClick={() => navigate('/admin/companies/create')} className='bg-black text-white cursor-pointer '>New Company</Button>
                 </div>
-                <CompaniesTable/>
+                <CompaniesTable />
             </div>
         </div>
     )

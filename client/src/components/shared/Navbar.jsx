@@ -59,8 +59,8 @@ const Navbar = () => {
                     {
                         !user ? (
                             <div className='flex items-center gap-2'>
-                                <Link to="/login"><Button variant="outline">Login</Button></Link>
-                                <Link to="/signup"> <Button className='bg-[#3834ec] hover:bg-[#0c0b72]'>Signup</Button></Link>
+                                <Link to="/login"><Button variant="outline" className='cursor-pointer '>Login</Button></Link>
+                                <Link to="/signup"> <Button variant="outline" className='cursor-pointer '>Signup</Button></Link>
 
                             </div>
                         ) : (
@@ -91,27 +91,19 @@ const Navbar = () => {
                                                     </div>
                                                 )
                                             }
-
-
+                                            
                                             <div className='flex w-fit items-center gap-2 cursor-pointer'>
                                                 <LogOut />
                                                 <Button onClick={logoutHandler} variant="link">Logout</Button>
                                             </div>
-
                                         </div>
                                     </div>
-
-
                                 </PopoverContent>
-
                             </Popover>
                         )
                     }
-
-
                 </div>
             </div>
-
         </div>
     )
 }

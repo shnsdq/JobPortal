@@ -91,7 +91,7 @@ function Signup() {
               value={input.fullname}
               name="fullname"
               onChange={changeEventHandler}
-              placeholder="patel"
+              placeholder="xyz"
             />
           </div>
           <div className='my-2'>
@@ -101,7 +101,7 @@ function Signup() {
               value={input.email}
               name="email"
               onChange={changeEventHandler}
-              placeholder="patel@gmail.com"
+              placeholder="xyz@gmail.com"
             />
           </div>
           <div className='my-2'>
@@ -161,7 +161,7 @@ function Signup() {
             </div>
            </div>
           {
-            loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait </Button> : <Button type="submit" className="bg-gray-200 rounded-md cursor-pointer w-full my-4">Signup</Button>
+            loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait </Button> : <Button type="submit" className="bg-black text-white rounded-md cursor-pointer w-full my-4">Signup</Button>
 
           }
           <span className='text-sm'>Already have an account? <Link to="/login" className="text-blue-600">Login</Link></span>

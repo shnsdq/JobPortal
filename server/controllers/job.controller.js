@@ -7,7 +7,7 @@ export const jobPost = async (req,res) => {
             res.status(400).json({ message: "Feild is required", success: false })
         }
 
-        const userId = req.userId;
+        const userId = req.userId; 
 
      const job = await Job.create({
         title,
@@ -19,7 +19,7 @@ export const jobPost = async (req,res) => {
         experienceLevel:experience,
         position,
         company:companyId,
-        createdBy:userId
+        created_by:userId
      })
 
       return res.status(201).json({
@@ -81,15 +81,15 @@ export const getJobById = async (req,res) => {
     }
 }
 
-//loggedIn as recruiter -> get job created by himself
+//loggedIn as recruiter -> job created by himself
 export const getJobByRecuriter = async (req,res) => {
     try {
         const userId = req.userId;
 
-        const jobs = await Job.find({createdBy : userId}).populate('company').sort({createdAt:-1})
+        const jobs = await Job.find({created_by : userId}).populate('company').sort({createdAt:-1})
 
         if(!jobs || jobs.length === 0){
-            return res.status(200).json({ message: " No Job created ",jobs: [], success: true })
+            return res.status(400).json({ message: " No Job created ",jobs: [], success: false })
         }
 
         return res.status(201).json({ jobs, success: true })     

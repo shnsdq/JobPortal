@@ -18,7 +18,9 @@ const CompaniesTable = () => {
             };
             return company?.name?.toLowerCase().includes(searchCompanyByText.toLowerCase());
         });
+
         setFilterCompany(filteredCompany);
+        
     }, [companies, searchCompanyByText])
 
     return (

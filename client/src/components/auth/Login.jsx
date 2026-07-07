@@ -20,7 +20,7 @@ function Login() {
     password: "",
     role: ""
   });
-  
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, user } = useSelector(store => store.auth);
@@ -31,6 +31,7 @@ function Login() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+
     try {
       dispatch(setLoading(true))
       const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
@@ -39,14 +40,17 @@ function Login() {
         },
         withCredentials: true
       });
+
       if (res.data.success) {
         dispatch(setUser(res.data.user));
         navigate("/");
         toast.success(res.data.message);
       }
+
     } catch (error) {
       console.log(error)
       toast.error(error.response.data.message)
+
     } finally {
       dispatch(setLoading(false));
     }
@@ -72,7 +76,7 @@ function Login() {
               value={input.email}
               name="email"
               onChange={changeEventHandler}
-              placeholder="patel@gmail.com"
+              placeholder="xyz@gmail.com"
             />
           </div>
 
@@ -110,13 +114,10 @@ function Login() {
                 />
                 <Label htmlFor="r2">Recruiter</Label>
               </div>
-
             </RadioGroup>
-
           </div>
           {
-            loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait </Button> : <Button type="submit" className="w-full my-4">Login</Button>
-
+            loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait </Button> : <Button type="submit" className="w-full my-4 bg-black text-white cursor-pointer ">Login</Button>
           }
 
           <span className='text-sm'>Don't have an account? <Link to="/signup" className="text-blue-600">Signup</Link></span>

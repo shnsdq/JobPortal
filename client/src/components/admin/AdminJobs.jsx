@@ -11,13 +11,13 @@ import { setSearchJobByText } from '../../redux/jobSlice'
 
 const AdminJobs = () => {
     useGetAllAdminJobs();
-    const [input,setInput] = useState("");
+    const [input, setInput] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    
-useEffect(()=>{
-dispatch(setSearchJobByText(input));
-},[input]);
+
+    useEffect(() => {
+        dispatch(setSearchJobByText(input));
+    }, [input]);
 
     return (
         <div>
@@ -27,14 +27,14 @@ dispatch(setSearchJobByText(input));
                     <Input
                         className='w-fit'
                         placeholder="Filter by name, role"
-                        onChange={(e)=>setInput(e.target.value)}
+                        onChange={(e) => setInput(e.target.value)}
                     />
-                    <Button className='bg-blue-500 hover:bg-blue-600 cursor-pointer' onClick={()=> navigate('/admin/jobs/create') }> New Job</Button>
+                    <Button className='bg-black text-white cursor-pointer' onClick={() => navigate('/admin/jobs/create')}> New Job</Button>
                 </div>
-                <AdminJobsTable/>
+                <AdminJobsTable />
             </div>
         </div>
     )
 }
 
-export default  AdminJobs 
+export default AdminJobs 

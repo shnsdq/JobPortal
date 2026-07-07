@@ -19,6 +19,7 @@ const useGetCompanyById = (companyId) => {
             }
         }
         fetchSingleCompany();
+        
     }, [companyId,dispatch])
 }
 
