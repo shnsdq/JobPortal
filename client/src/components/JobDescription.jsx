@@ -18,24 +18,7 @@ const JobDescription = () => {
   const jobId = params.id;
   const dispatch = useDispatch();
 
-  const applyJobHandler = async() => {
-    try {
-      const res = await axios.get(`${APPLICATION_API_END_POINT}/apply/${jobId}`, { withCredentials: true });
-      
-      if(res.data.success){
-       setIsApplied(true); //update the local state
-      
-       const updateSingleJob = {...singleJob,applications:[...singleJob.applications,{applicant:user?._id}]}
-       dispatch(setSingleJob(updateSingleJob)); //helps us in real time update 
-       toast.success(res.data.message);
-      }
-    } catch (error) {
-      console.log(error)
-      toast.error(error.response.data.message)
-    }
-  }
-
-  useEffect(() => {
+   useEffect(() => {
     const fetchSingleJob = async () => {
       try {
         const res = await axios.get(`${JOB_API_END_POINT}/get/${jobId}`, { withCredentials: true });
@@ -48,8 +31,29 @@ const JobDescription = () => {
       }
     }
     fetchSingleJob();
-  }, [jobId, dispatch, user?._id])
 
+  }, [jobId, dispatch, user?._id])
+  
+
+  const applyJobHandler = async() => {
+    try {
+      const res = await axios.get(`${APPLICATION_API_END_POINT}/apply/${jobId}`, { withCredentials: true });
+      
+      if(res.data.success){
+       setIsApplied(true); //update the local state
+      
+       const updateSingleJob = {...singleJob,applications:[...singleJob.applications,{applicant:user?._id}]}
+       dispatch(setSingleJob(updateSingleJob)); //helps us in real time update 
+       toast.success(res.data.message);
+      }
+
+    } catch (error) {
+      console.log(error)
+      toast.error(error.response.data.message)
+    }
+  }
+
+ 
   return (
     <div className='max-w-7xl mx-auto my-10'>
       <div className='flex items-center justify-between'>
@@ -74,10 +78,10 @@ const JobDescription = () => {
         <h1 className='font-bold my-1'>Role: <span className='pl-4 font-normal text-gray-800'>{singleJob?.title}</span></h1>
         <h1 className='font-bold my-1'>Location: <span className='pl-4 font-normal text-gray-800'>{singleJob?.location}</span></h1>
         <h1 className='font-bold my-1'>Description: <span className='pl-4 font-normal text-gray-800'>{singleJob?.description}</span></h1>
-        <h1 className='font-bold my-1'>Experience: <span className='pl-4 font-normal text-gray-800'>{singleJob?.experience}</span></h1>
+        <h1 className='font-bold my-1'>Experience: <span className='pl-4 font-normal text-gray-800'>{singleJob?.experienceLevel}</span></h1>
         <h1 className='font-bold my-1'>Salary: <span className='pl-4 font-normal text-gray-800'> {singleJob?.salary}</span></h1>
         <h1 className='font-bold my-1'>Total Applications: <span className='pl-4 font-normal text-gray-800'> {singleJob?.applications?.length}</span></h1>
-        <h1 className='font-bold my-1'>Posted Date: <span className='pl-4 font-normal text-gray-800'>{singleJob?.createdAt.split("T")[0]}</span></h1>
+        <h1 className='font-bold my-1'>Posted Date: <span className='pl-4 font-normal text-gray-800'>{singleJob?.createdAt?.split("T")[0]}</span></h1>
       </div>
     </div>
   )

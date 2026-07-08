@@ -14,7 +14,8 @@ import useGetCompanyById from '../../hooks/useGetCompanyById'
 
 const CompanySetup = () => {
     const params = useParams();
-    const companyId= params.id;
+    const companyId = params.id;
+    
     useGetCompanyById(companyId);
 
     const [input, setInput] = useState({

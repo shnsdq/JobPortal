@@ -148,11 +148,11 @@ const PostJob = () => {
                         </div>
                         {
                             companies.length > 0 && (
-                                <Select className='bg-gray-200' onValueChange={selectChangeHandler}>
+                                <Select onValueChange={selectChangeHandler}>
                                     <SelectTrigger className="w-[180px]">
                                         <SelectValue placeholder="Select a Company" />
                                     </SelectTrigger>
-                                    <SelectContent>
+                                    <SelectContent className='bg-gray-200'>
                                         <SelectGroup>
                                             {
                                                 companies.map((company,index) => {
@@ -169,7 +169,8 @@ const PostJob = () => {
                         }
                     </div>
                     {
-                        loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait </Button> : <Button type="submit" className="bg-black text-white cursor-pointer w-full my-4 ">Post New Job</Button>
+                        loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait </Button> 
+                        : <Button type="submit" className="bg-black text-white cursor-pointer w-full my-4 ">Post New Job</Button>
                     }
                     {
                         companies.length === 0 && <p className='text-xl text-red-600 font-bold text-center my-3'> *Please register a company first,before posting a job</p>

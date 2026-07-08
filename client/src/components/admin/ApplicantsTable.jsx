@@ -50,7 +50,10 @@ const ApplicantsTable = () => {
                                 <TableCell>{item?.applicant?.phoneNumber}</TableCell>
                                 <TableCell >
                                     {
-                                      item?.applicant?.profile?.resume ? <a className='text-blue-600 cursor-pointer' href={item?.applicant?.profile?.resume} target="_blank" rel="noopener noreferrer">{item?.applicant?.profile?.resumeOriginalName}</a> : <span>NA</span>
+                                      item?.applicant?.profile?.resume ? 
+                                      <a className='text-blue-600 cursor-pointer' href={item?.applicant?.profile?.resume} target="_blank" rel="noopener noreferrer">
+                                        {item?.applicant?.profile?.resumeOriginalName}</a> 
+                                      : <span>NA</span>
                                     }</TableCell>
                                 <TableCell>{item?.applicant?.createdAt.split("T")[0]}</TableCell>
                                 <TableCell className='text-right cursor-pointer'>
@@ -67,14 +70,6 @@ const ApplicantsTable = () => {
                                                 })
                                             }
 
-                                            {/* <div onClick={() => navigate(`/admin/companies/${job._id}`)} className='flex items-center gap-2 w-fit cursor-pointer'>
-                                                <Edit2 className='w-4' />
-                                                <span>Edit</span>
-                                            </div>
-                                            <div onClick={() => navigate(`/admin/jobs/${job._id}/applicants`)} className='flex items-center gap-2 w-fit cursor-pointer mt-2'>
-                                                <Eye className='w-4' />
-                                                <span>Applicants</span>
-                                            </div> */}
                                         </PopoverContent>
                                     </Popover>
                                 </TableCell>

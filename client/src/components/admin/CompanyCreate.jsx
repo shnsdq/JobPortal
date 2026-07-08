@@ -17,7 +17,6 @@ const CompanyCreate = () => {
 
   const [companyName, setCompanyName] = useState("");
 
-
   const registerNewCompany = async () => {
 
     try {
@@ -63,6 +62,7 @@ const CompanyCreate = () => {
           onChange={(e) => setCompanyName(e.target.value)}
           className='my-2'
         />
+
         <div className='flex items-center gap-2 my-10'>
           <Button variant="outline" onClick={() => navigate("/admin/companies")}>Cancel</Button>
           <Button variant="outline" onClick={registerNewCompany}>Continue</Button>

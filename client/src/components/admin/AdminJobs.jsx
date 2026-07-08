@@ -31,6 +31,7 @@ const AdminJobs = () => {
                     />
                     <Button className='bg-black text-white cursor-pointer' onClick={() => navigate('/admin/jobs/create')}> New Job</Button>
                 </div>
+                
                 <AdminJobsTable />
             </div>
         </div>

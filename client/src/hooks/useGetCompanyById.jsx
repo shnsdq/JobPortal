@@ -18,6 +18,7 @@ const useGetCompanyById = (companyId) => {
                 console.log(error)
             }
         }
+        
         fetchSingleCompany();
         
     }, [companyId,dispatch])
