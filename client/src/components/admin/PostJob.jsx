@@ -25,6 +25,7 @@ const PostJob = () => {
         position: 0,
         companyId: ""
     });
+    
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const { companies } = useSelector(store => store.company);

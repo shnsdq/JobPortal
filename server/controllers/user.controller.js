@@ -96,7 +96,7 @@ export const logout = async (req, res) => {
 export const updateProfile = async (req, res) => {
     try {
         const userId = req.userId;
-        const user = await User.findById(userId)
+        let user = await User.findById(userId)
         if (!user) {
             res.status(400).json({ message: "Invalid user" })
         }
@@ -107,7 +107,7 @@ export const updateProfile = async (req, res) => {
             res.status(400).json({ message: "Field is required", success: false })
         }
 
-         const file = req.file;
+        const file = req.file;
         let fileUri = null;
 
         if(file){
@@ -119,20 +119,25 @@ export const updateProfile = async (req, res) => {
             cloudResponse = await cloudinary.uploader.upload(fileUri.content)
         }
 
-        
         let skillsArray;
         if(skills){
             skillsArray = skills.split(",");
         }
        
         // updating data
-        if(fullname) user.fullname = fullname
-        if(email) user.email = email
-        if(phoneNumber)  user.phoneNumber = phoneNumber
+        if(fullname) 
+        user.fullname = fullname
+        if(email)
+         user.email = email
+        if(phoneNumber)  
+        user.phoneNumber = phoneNumber
 
-         if (!user.profile) user.profile = {};
-        if(bio) user.profile.bio = bio
-        if(skills) user.profile.skills = skillsArray
+         if (!user.profile)
+         user.profile = {};
+        if(bio) 
+        user.profile.bio = bio
+        if(skills) 
+        user.profile.skills = skillsArray
 
     
         // resume comes later here...
@@ -143,7 +148,7 @@ export const updateProfile = async (req, res) => {
 
         await user.save();
 
-       const updatedUser = {
+       user = {
             _id: user._id,
             fullname: user.fullname,
             email: user.email,
@@ -152,7 +157,7 @@ export const updateProfile = async (req, res) => {
             profile: user.profile
         }
 
-        return res.status(201).json({ success: true, message: "Updated Successfully", updatedUser })
+        return res.status(201).json({ success: true, message: "Updated Successfully", user })
 
     } catch (error) {
         console.log(error)
