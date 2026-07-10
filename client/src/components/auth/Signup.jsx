@@ -9,7 +9,7 @@ import { USER_API_END_POINT } from '../../utils/constant.js'
 import { toast } from 'sonner'
 import { useDispatch, useSelector } from 'react-redux'
 import store from '../../redux/store'
-import { setLoading,setUser } from '@/redux/authSlice'
+import { setLoading, setUser } from '@/redux/authSlice'
 import { Loader2 } from 'lucide-react'
 import axios from 'axios'
 
@@ -24,14 +24,15 @@ function Signup() {
     role: "",
     file: "",
   });
-  const { loading,user } = useSelector(store => store.auth);
+
+  const { loading, user } = useSelector(store => store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   }
-  
+
   const changeFileHandler = (e) => {
     setInput({ ...input, file: e.target.files?.[0] });
   }
@@ -40,7 +41,7 @@ function Signup() {
     e.preventDefault();
 
     const formData = new FormData();
-    
+
     formData.append("fullname", input.fullname)
     formData.append("email", input.email)
     formData.append("phoneNumber", input.phoneNumber)
@@ -49,6 +50,7 @@ function Signup() {
     if (input.file) {
       formData.append("file", input.file)
     }
+
     try {
       dispatch(setLoading(true))
       const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
@@ -57,26 +59,29 @@ function Signup() {
         },
         withCredentials: true
       });
+
       if (res.data.success) {
         dispatch(setUser(res.data.user));
         navigate("/");
         toast.success(res.data.message);
       }
+
     } catch (error) {
       console.log(error)
       const errMsg = error.response?.data?.message || "Server Connection failed";
       toast.error(errMsg)
+      
     } finally {
       dispatch(setLoading(false));
     }
   }
 
-   useEffect(()=>{
-    if(user){
+  useEffect(() => {
+    if (user) {
       navigate("/")
     }
-    },[user])
-  
+  }, [user])
+
 
   return (
     <div>
@@ -159,10 +164,9 @@ function Signup() {
                 className="cursor-pointer p-2 rounded-md"
               />
             </div>
-           </div>
+          </div>
           {
             loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait </Button> : <Button type="submit" className="bg-black text-white rounded-md cursor-pointer w-full my-4">Signup</Button>
-
           }
           <span className='text-sm'>Already have an account? <Link to="/login" className="text-blue-600">Login</Link></span>
         </form>

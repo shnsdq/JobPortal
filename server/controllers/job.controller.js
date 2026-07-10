@@ -1,102 +1,103 @@
-import {Job} from "../models/job.model.js"
+import { Job } from "../models/job.model.js"
 
-export const jobPost = async (req,res) => {
+export const jobPost = async (req, res) => {
     try {
-        const {title, description,requirements, salary,location,jobType,experience,position,companyId } = req.body;
-        if(!title || !description ||!requirements || !salary ||!location ||!jobType || !experience ||!position || !companyId ){
-            res.status(400).json({ message: "Feild is required", success: false })
+        const { title, description, requirements, salary, location, jobType, experience, position, companyId } = req.body;
+       
+        if (!title || !description || !requirements || !salary || !location || !jobType || !experience || !position || !companyId) {
+            return res.status(400).json({ message: "Field is required", success: false })
         }
 
-        const userId = req.userId; 
+        const userId = req.userId;
 
-     const job = await Job.create({
-        title,
-        description,
-        requirements:requirements.split(','),
-        salary:Number(salary),
-        location,
-        jobType,
-        experienceLevel:experience,
-        position,
-        company:companyId,
-        created_by:userId
-     })
+        const job = await Job.create({
+            title,
+            description,
+            requirements: requirements.split(','),
+            salary: Number(salary),
+            location,
+            jobType,
+            experienceLevel: experience,
+            position,
+            company: companyId,
+            created_by: userId
+        })
 
-      return res.status(201).json({
-         message: "Job created successfully", 
-         job,
-         success: true,
-         })     
+        return res.status(201).json({
+            message: "Job created successfully",
+            job,
+            success: true,
+        })
 
     } catch (error) {
         console.log(error)
-       return res.status(500).json({
-         message:error.message, 
-         success: false,
-         })     
+        return res.status(500).json({
+            message: error.message,
+            success: false,
+        })
     }
 }
 
-export const getAllJobs = async (req,res) => {
+export const getAllJobs = async (req, res) => {
     try {
-        const keyword = req.query.keyword || "" ;
+        const keyword = req.query.keyword || "";
 
         const query = keyword ?
-         {
-            $or:[
-                {title:{ $regex: keyword, $options: "i"}},
-                {description:{ $regex: keyword, $options: "i"}},
-            ]
-        }
-        : {}; // Return all jobs if no keyword is provided
+            {
+                $or: [
+                    { title: { $regex: keyword, $options: "i" } },
+                    { description: { $regex: keyword, $options: "i" } },
+                ]
+            }
+            : {}; // Return all jobs if no keyword is provided
 
-        const jobs = await Job.find(query).populate({path:"company"}).sort({createdAt:-1});
-       
-        if(!jobs)
-        return res.status(400).json({ message: " No Job found ", success: false })     
+        const jobs = await Job.find(query).populate({ path: "company" }).sort({ createdAt: -1 });
 
-        return res.status(201).json({ jobs, success: true })     
+        if (!jobs)
+            return res.status(400).json({ message: " No Job found ", success: false })
+
+        return res.status(201).json({ jobs, success: true })
 
     } catch (error) {
         console.log(error)
-        return res.status(500).json({ message:error.message, success: false })     
+        return res.status(500).json({ message: error.message, success: false })
 
     }
 }
 
-export const getJobById = async (req,res) => {
+export const getJobById = async (req, res) => {
     try {
         const jobId = req.params.id;
 
         const job = await Job.findById(jobId).populate('company applications')
 
-        if(!job){
-             return res.status(404).json({ message: " No Job found ", success: false })
+        if (!job) {
+            return res.status(404).json({ message: " No Job found ", success: false })
         }
 
-         return res.status(201).json({ job, success: true })
+        return res.status(201).json({ job, success: true })
 
     } catch (error) {
-         console.log(error)
-        return res.status(500).json({ message:error.message, success: false })
+        console.log(error)
+        return res.status(500).json({ message: error.message, success: false })
     }
 }
 
 //loggedIn as recruiter -> job created by himself
-export const getJobByRecuriter = async (req,res) => {
+export const getJobByRecuriter = async (req, res) => {
     try {
         const userId = req.userId;
 
-        const jobs = await Job.find({created_by : userId}).populate('company').sort({createdAt:-1})
+        const jobs = await Job.find({ created_by: userId }).populate('company').sort({ createdAt: -1 })
 
-        if(!jobs || jobs.length === 0){
-            return res.status(400).json({ message: " No Job created ",jobs: [], success: false })
+        if (!jobs || jobs.length === 0) {
+            return res.status(400).json({ message: " No Job created ", jobs: [], success: false })
         }
 
-        return res.status(201).json({ jobs, success: true })     
+        return res.status(201).json({ jobs, success: true })
 
     } catch (error) {
         console.log(error)
-        return res.status(500).json({ message:error.message, success: false })
+        return res.status(500).json({ message: error.message, success: false })
     }
 }

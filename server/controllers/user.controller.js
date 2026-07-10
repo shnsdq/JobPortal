@@ -9,12 +9,12 @@ export const register = async (req, res) => {
         const { fullname, email, phoneNumber, password, role } = req.body
 
         if (!fullname || !email || !phoneNumber || !password || !role) {
-            res.status(400).json({ message: "Feild is required", success: false })
+           return res.status(400).json({ message: "Feild is required", success: false })
         }
 
         const exists = await User.findOne({ email })
         if (exists) {
-            res.status(400).json({ message: "User already exists",
+           return res.status(400).json({ message: "User already exists",
                 success:false
              })
         }
@@ -61,27 +61,28 @@ export const login = async (req, res) => {
     try {
         const { email, password, role } = req.body;
         if (!email || !password || !role) {
-            res.status(400).json({ message: "Field is required" })
+           return res.status(400).json({ message: "Field is required" })
         }
 
         const user = await User.findOne({ email })
         if (!user) {
-            res.status(400).json({ message: "Invalid email or password" })
+           return res.status(400).json({ message: "Invalid email or password" })
         }
 
         const isPasswordCorrect = await bcrypt.compare(password, user.password)
         if (!isPasswordCorrect) {
-            res.status(400).json({ message: "Invalid password" })
+           return res.status(400).json({ message: "Invalid password" })
         }
 
         const tokenData = { userId: user._id }
 
         const token = jwt.sign(tokenData, process.env.TOKEN_KEY, { expiresIn: "1d" })
 
-        res.status(201).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpsOnly: true, sameSite: 'strict' }).json({ message: `Welcome back ${user.fullname}`, success: true, user })
+       return res.status(201).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpsOnly: true, sameSite: 'strict' }).json({ message: `Welcome back ${user.fullname}`, success: true, user })
 
     } catch (error) {
         console.log(error)
+        return res.status(500).json({ success: false, message: "Server Error" })
     }
 }
 
@@ -98,13 +99,13 @@ export const updateProfile = async (req, res) => {
         const userId = req.userId;
         let user = await User.findById(userId)
         if (!user) {
-            res.status(400).json({ message: "Invalid user" })
+          return res.status(400).json({ message: "Invalid user" })
         }
 
         const { fullname, email, phoneNumber, bio, skills } = req.body;
 
         if (!fullname || !email || !phoneNumber || !bio || !skills) {
-            res.status(400).json({ message: "Field is required", success: false })
+           return res.status(400).json({ message: "Field is required", success: false })
         }
 
         const file = req.file;
