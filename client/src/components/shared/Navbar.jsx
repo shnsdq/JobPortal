@@ -9,6 +9,7 @@ import { setUser } from '../../redux/authSlice'
 import axios from 'axios'
 import { USER_API_END_POINT } from '../../utils/constant'
 import { toast } from 'sonner'
+import profilePic from '../../assets/profile.jpg'
 
 const Navbar = () => {
     
@@ -67,14 +68,14 @@ const Navbar = () => {
                             <Popover>
                                 <PopoverTrigger asChild>
                                     <Avatar className="cursor-pointer">
-                                        <AvatarImage src={user?.profile?.profilePhoto ? user?.profile?.profilePhoto : "/src/assets/profile.jpg"  } alt="photo" />
+                                        <AvatarImage src={user?.profile?.profilePhoto ? user?.profile?.profilePhoto : profilePic  } alt="photo" />
                                     </Avatar>
                                 </PopoverTrigger>
                                 <PopoverContent className="w-80 bg-gray-200">
                                     <div>
                                         <div className='flex gap-4 space-y-2'>
                                             <Avatar className="cursor-pointer">
-                                                <AvatarImage src={user?.profile?.profilePhoto ? user?.profile?.profilePhoto : "/src/assets/profile.jpg"} alt="@shadcn" />
+                                                <AvatarImage src={user?.profile?.profilePhoto ? user?.profile?.profilePhoto : profilePic} alt="@shadcn" />
                                             </Avatar>
                                             <div>
                                                 <h4 className='font-medium'>{user?.fullname}</h4>

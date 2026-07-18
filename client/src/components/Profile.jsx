@@ -10,6 +10,7 @@ import UpdateProfileDialogue from './UpdateProfileDialogue'
 import { useSelector } from 'react-redux'
 import useGetAppliedJobs from '../hooks/useGetAppliedJobs'
 import { useNavigate } from 'react-router-dom'
+import profilePic from '../assets/profile.jpg'
 
 //const skills = ["HTML","Css","Javascript"]
 const isResume = true;
