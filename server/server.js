@@ -23,9 +23,9 @@ app.use(cors({
 }));
 
 
-app.get('/',async (req,res) => {
-    res.json({success:true,message:"HomePage"})
-})
+// app.get('/',async (req,res) => {
+//     res.json({success:true,message:"HomePage"})
+// })
 
 //routes
 app.use('/api/v1/user',userRoute);
@@ -40,6 +40,6 @@ app.get("/*splat", (req, res) => {
   res.sendFile(path.resolve(_dirname, "client", "dist", "index.html"));
 });
 
-app.listen(PORT, "0.0.0.0",()=>{
+app.listen(PORT, ()=>{
     dbConnect();
      console.log(`Server is listening at : ${PORT}`)})
