@@ -96,7 +96,7 @@ function Signup() {
               value={input.fullname}
               name="fullname"
               onChange={changeEventHandler}
-              placeholder="xyz"
+              placeholder="FullName"
             />
           </div>
           <div className='my-2'>

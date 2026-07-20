@@ -91,7 +91,7 @@ export const getJobByRecuriter = async (req, res) => {
         const jobs = await Job.find({ created_by: userId }).populate('company').sort({ createdAt: -1 })
 
         if (!jobs || jobs.length === 0) {
-            return res.status(400).json({ message: " No Job created ", jobs: [], success: false })
+            return res.status(200).json({ message: " No Job created ", jobs: [], success: true })
         }
 
         return res.status(201).json({ jobs, success: true })

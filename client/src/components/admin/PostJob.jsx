@@ -11,7 +11,7 @@ import { Loader2 } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import { toast } from 'sonner'
 
-const companyArray = [];
+//const companyArray = [];
 
 const PostJob = () => {
     const [input, setInput] = useState({
