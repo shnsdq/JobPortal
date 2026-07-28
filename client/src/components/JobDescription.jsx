@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Badge } from './ui/badge'
 import { Button } from './ui/button'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { setSingleJob } from '../redux/jobSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +17,7 @@ const JobDescription = () => {
   const params = useParams();
   const jobId = params.id;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
    useEffect(() => {
 
@@ -24,7 +25,7 @@ const JobDescription = () => {
         navigate("/login");
         return;
     }
-    
+
     const fetchSingleJob = async () => {
       try {
         const res = await axios.get(`${JOB_API_END_POINT}/get/${jobId}`, { withCredentials: true });
@@ -38,7 +39,7 @@ const JobDescription = () => {
     }
     fetchSingleJob();
 
-  }, [jobId, dispatch, user?._id])
+  }, [jobId, dispatch, user,navigate])
   
 
   const applyJobHandler = async() => {
