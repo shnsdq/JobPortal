@@ -21,10 +21,10 @@ const JobDescription = () => {
 
    useEffect(() => {
 
-    if(!user) {
-        navigate("/login");
-        return;
-    }
+    // if(!user) {
+    //     navigate("/login");
+    //     return;
+    // }
 
     const fetchSingleJob = async () => {
       try {
