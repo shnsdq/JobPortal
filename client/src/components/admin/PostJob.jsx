@@ -13,6 +13,15 @@ import { toast } from 'sonner'
 
 //const companyArray = [];
 
+const location = [
+  { label: "Delhi NCR", value: "Delhi NCR" },
+  { label: "Banglore", value: "Banglore" },
+  { label: "Hyderabad", value: "Hyderabad" },
+  { label: "Pune", value: "Pune" },
+  { label: "Mumbai", value: "Mumbai" },
+]
+ 
+
 const PostJob = () => {
     const [input, setInput] = useState({
         title: "",
@@ -25,7 +34,7 @@ const PostJob = () => {
         position: 0,
         companyId: ""
     });
-    
+
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const { companies } = useSelector(store => store.company);
@@ -109,13 +118,11 @@ const PostJob = () => {
                         </div>
                         <div>
                             <Label>Location</Label>
-                            <Input
-                                type="text"
-                                name="location"
-                                value={input.location}
-                                onChange={changeEventHandler}
-                                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                            />
+                            <select onChange={changeEventHandler} >
+                                <option value="Mumbai">Mumbai</option>
+                                <option value="Hyderabad">Hyderabad</option>
+                                <option value="Delhi">Delhi</option>
+                            </select>
                         </div>
                         <div>
                             <Label>JobType</Label>
@@ -156,7 +163,7 @@ const PostJob = () => {
                                     <SelectContent className='bg-gray-200'>
                                         <SelectGroup>
                                             {
-                                                companies.map((company,index) => {
+                                                companies.map((company, index) => {
                                                     return (
                                                         <SelectItem key={index} value={company?.name?.toLowerCase()}>{company?.name}
                                                         </SelectItem>
@@ -170,8 +177,8 @@ const PostJob = () => {
                         }
                     </div>
                     {
-                        loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait </Button> 
-                        : <Button type="submit" className="bg-black text-white cursor-pointer w-full my-4 ">Post New Job</Button>
+                        loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait </Button>
+                            : <Button type="submit" className="bg-black text-white cursor-pointer w-full my-4 ">Post New Job</Button>
                     }
                     {
                         companies.length === 0 && <p className='text-xl text-red-600 font-bold text-center my-3'> *Please register a company first,before posting a job</p>
