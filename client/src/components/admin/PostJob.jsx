@@ -13,14 +13,26 @@ import { toast } from 'sonner'
 
 //const companyArray = [];
 
-const location = [
-  { label: "Delhi NCR", value: "Delhi NCR" },
-  { label: "Banglore", value: "Banglore" },
-  { label: "Hyderabad", value: "Hyderabad" },
-  { label: "Pune", value: "Pune" },
-  { label: "Mumbai", value: "Mumbai" },
+const locations = [
+    { label: "Delhi NCR", value: "Delhi NCR" },
+    { label: "Banglore", value: "Banglore" },
+    { label: "Hyderabad", value: "Hyderabad" },
+    { label: "Pune", value: "Pune" },
+    { label: "Mumbai", value: "Mumbai" },
 ]
- 
+
+const jobRole = [
+    { label: "Frontend Developer", value: "Frontend Developer" },
+    { label: "Backend Developer", value: "Backend Developer" },
+    { label: "Full Stack Developer", value: "Full Stack Developer" },
+]
+
+const salary = [
+    { label: "3-4lakh", value: "3-4lakh" },
+    { label: "4-10lakh", value: "4-10lakh" },
+    { label: "10-15lakh", value: "10-15lakh" },
+]
+
 
 const PostJob = () => {
     const [input, setInput] = useState({
@@ -106,33 +118,54 @@ const PostJob = () => {
                                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                             />
                         </div>
-                        <div>
-                            <Label>Salary</Label>
-                            <Input
-                                type="text"
-                                name="salary"
-                                value={input.salary}
-                                onChange={changeEventHandler}
-                                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                            />
+                         <div>
+                            <Select onValueChange={changeEventHandler}>
+                                <SelectTrigger className="w-[180px]">
+                                    <SelectValue placeholder="Salary" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        {salary.map((item) => (
+                                            <SelectItem key={item.value} value={item.value}>
+                                                {item.label}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
                         </div>
                         <div>
-                            <Label>Location</Label>
-                            <select onChange={changeEventHandler} >
-                                <option value="Mumbai">Mumbai</option>
-                                <option value="Hyderabad">Hyderabad</option>
-                                <option value="Delhi">Delhi</option>
-                            </select>
+                            <Select onValueChange={changeEventHandler}>
+                                <SelectTrigger className="w-[180px]">
+                                    <SelectValue placeholder="Location" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        {locations.map((item) => (
+                                            <SelectItem key={item.value} value={item.value}>
+                                                {item.label}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
                         </div>
                         <div>
-                            <Label>JobType</Label>
-                            <Input
-                                type="text"
-                                name="jobType"
-                                value={input.jobType}
-                                onChange={changeEventHandler}
-                                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                            />
+                            <Select onValueChange={changeEventHandler}>
+                                <SelectTrigger className="w-[180px]">
+                                    <SelectValue placeholder="Job Role" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        {jobRole.map((item) => (
+                                            <SelectItem key={item.value} value={item.value}>
+                                                {item.label}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        
                         </div>
                         <div>
                             <Label>Experience Level</Label>
