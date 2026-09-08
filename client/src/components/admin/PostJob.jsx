@@ -28,9 +28,9 @@ const title = [
 ]
 
 const salary = [
-    { label: "3-4lakh", value: "3-4lakh" },
-    { label: "4-10lakh", value: "4-10lakh" },
-    { label: "10-15lakh", value: "10-15lakh" },
+    { label: "3-4", value: "3-4" },
+    { label: "4-10", value: "4-10" },
+    { label: "10-15", value: "10-15" },
 ]
 
 
