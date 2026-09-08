@@ -98,8 +98,8 @@ const PostJob = () => {
                                 <SelectTrigger className="w-[180px]">
                                     <SelectValue placeholder="Title" />
                                 </SelectTrigger>
-                                <SelectContent className='bg-gray-200 cursor-pointer'>
-                                    <SelectGroup>
+                                <SelectContent className='bg-gray-200'>
+                                    <SelectGroup className="cursor-pointer">
                                         {title.map((item) => (
                                             <SelectItem key={item.value} value={item.value}>
                                                 {item.label}
@@ -111,27 +111,6 @@ const PostJob = () => {
                         
                         </div>
                        
-                        {
-                            companies.length > 0 && (
-                                <Select onValueChange={selectChangeHandler}>
-                                    <SelectTrigger className="w-[180px]">
-                                        <SelectValue placeholder="Company" />
-                                    </SelectTrigger>
-                                    <SelectContent className='bg-gray-200 cursor-pointer'>
-                                        <SelectGroup>
-                                            {
-                                                companies.map((company, index) => {
-                                                    return (
-                                                        <SelectItem key={index} value={company?.name?.toLowerCase()}>{company?.name}
-                                                        </SelectItem>
-                                                    )
-                                                })
-                                            }
-                                        </SelectGroup>
-                                    </SelectContent>
-                                </Select>
-                            )
-                        }
                          <div>
                             <Select onValueChange={(value) => selectFieldHandler("salary", value)}>
                                 <SelectTrigger className="w-[180px]">
@@ -216,6 +195,27 @@ const PostJob = () => {
                                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                             />
                         </div>
+                         {
+                            companies.length > 0 && (
+                                <Select onValueChange={selectChangeHandler}>
+                                    <SelectTrigger className="w-[180px]">
+                                        <SelectValue placeholder="Company" />
+                                    </SelectTrigger>
+                                    <SelectContent className='bg-gray-200 cursor-pointer'>
+                                        <SelectGroup>
+                                            {
+                                                companies.map((company, index) => {
+                                                    return (
+                                                        <SelectItem key={index} value={company?.name?.toLowerCase()}>{company?.name}
+                                                        </SelectItem>
+                                                    )
+                                                })
+                                            }
+                                        </SelectGroup>
+                                    </SelectContent>
+                                </Select>
+                            )
+                        }
                         
                     </div>
                     {
