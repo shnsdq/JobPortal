@@ -119,55 +119,6 @@ const PostJob = () => {
                             />
                         </div>
                          <div>
-                            <Select onValueChange={changeEventHandler}>
-                                <SelectTrigger className="w-[180px]">
-                                    <SelectValue placeholder="Salary" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectGroup>
-                                        {salary.map((item) => (
-                                            <SelectItem key={item.value} value={item.value}>
-                                                {item.label}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectGroup>
-                                </SelectContent>
-                            </Select>
-                        </div>
-                        <div>
-                            <Select onValueChange={changeEventHandler}>
-                                <SelectTrigger className="w-[180px]">
-                                    <SelectValue placeholder="Location" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectGroup>
-                                        {locations.map((item) => (
-                                            <SelectItem key={item.value} value={item.value}>
-                                                {item.label}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectGroup>
-                                </SelectContent>
-                            </Select>
-                        </div>
-                        <div>
-                            <Select onValueChange={changeEventHandler}>
-                                <SelectTrigger className="w-[180px]">
-                                    <SelectValue placeholder="Job Role" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectGroup>
-                                        {jobRole.map((item) => (
-                                            <SelectItem key={item.value} value={item.value}>
-                                                {item.label}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectGroup>
-                                </SelectContent>
-                            </Select>
-                        
-                        </div>
-                        <div>
                             <Label>Experience Level</Label>
                             <Input
                                 type="text"
@@ -187,6 +138,56 @@ const PostJob = () => {
                                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                             />
                         </div>
+                         <div>
+                            <Select onValueChange={changeEventHandler}>
+                                <SelectTrigger className="w-[180px]">
+                                    <SelectValue placeholder="Salary" />
+                                </SelectTrigger>
+                                <SelectContent className='bg-gray-200 cursor-pointer'>
+                                    <SelectGroup>
+                                        {salary.map((item) => (
+                                            <SelectItem key={item.value} value={item.value}>
+                                                {item.label}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <div>
+                            <Select onValueChange={changeEventHandler}>
+                                <SelectTrigger className="w-[180px]">
+                                    <SelectValue placeholder="Location" />
+                                </SelectTrigger>
+                                <SelectContent className='bg-gray-200 cursor-pointer'>
+                                    <SelectGroup>
+                                        {locations.map((item) => (
+                                            <SelectItem key={item.value} value={item.value}>
+                                                {item.label}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <div>
+                            <Select onValueChange={changeEventHandler}>
+                                <SelectTrigger className="w-[180px]">
+                                    <SelectValue placeholder="Job Role" />
+                                </SelectTrigger>
+                                <SelectContent className='bg-gray-200 cursor-pointer'>
+                                    <SelectGroup>
+                                        {jobRole.map((item) => (
+                                            <SelectItem key={item.value} value={item.value}>
+                                                {item.label}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        
+                        </div>
+                       
                         {
                             companies.length > 0 && (
                                 <Select onValueChange={selectChangeHandler}>
