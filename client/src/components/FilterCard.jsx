@@ -11,7 +11,7 @@ const filterData = [
     array: ["Delhi NCR", "Banglore", "Hyderabad", "Pune", "Mumbai"]
   },
   {
-    filterType: "Title",
+    filterType: "Job Title",
     array: ["Frontend Developer", "Backend Developer", "FullStack Developer"]
   },
   {

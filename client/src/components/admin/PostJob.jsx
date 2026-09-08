@@ -60,6 +60,11 @@ const PostJob = () => {
         setInput({ ...input, companyId: selectedCompany._id })
     }
 
+      const selectFieldHandler = (fieldName, value) => {
+        setInput({ ...input, [fieldName]: value });
+    }
+
+
     const submitHandler = async (e) => {
         e.preventDefault();
 
@@ -89,7 +94,7 @@ const PostJob = () => {
                 <form onSubmit={submitHandler} className='p-8 max-w-4xl border border-gray-200 shadow-lg rounded-md '>
                     <div className='grid grid-cols-2 gap-2'>
                         <div>
-                            <Select onValueChange={changeEventHandler}>
+                            <Select onValueChange={(value) => selectFieldHandler("title", value)}>
                                 <SelectTrigger className="w-[180px]">
                                     <SelectValue placeholder="Title" />
                                 </SelectTrigger>
@@ -128,7 +133,7 @@ const PostJob = () => {
                             )
                         }
                          <div>
-                            <Select onValueChange={changeEventHandler}>
+                            <Select onValueChange={(value) => selectFieldHandler("salary", value)}>
                                 <SelectTrigger className="w-[180px]">
                                     <SelectValue placeholder="Salary" />
                                 </SelectTrigger>
@@ -144,7 +149,7 @@ const PostJob = () => {
                             </Select>
                         </div>
                         <div>
-                            <Select onValueChange={changeEventHandler}>
+                            <Select onValueChange={(value) => selectFieldHandler("location", value)}>
                                 <SelectTrigger className="w-[180px]">
                                     <SelectValue placeholder="Location" />
                                 </SelectTrigger>
@@ -164,8 +169,8 @@ const PostJob = () => {
                             <Label>JobType</Label>
                             <Input
                                 type="text"
-                                name="title"
-                                value={input.title}
+                                name="jobType"
+                                value={input.jobType}
                                 onChange={changeEventHandler}
                                 placeholder="Full Time"
                                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
