@@ -19,6 +19,7 @@ const locations = [
     { label: "Hyderabad", value: "Hyderabad" },
     { label: "Pune", value: "Pune" },
     { label: "Mumbai", value: "Mumbai" },
+    { label: "Kolkata", value: "Kolkata" },
 ]
 
 const title = [
@@ -26,13 +27,15 @@ const title = [
     { label: "Backend Developer", value: "Backend Developer" },
     { label: "FullStack Developer", value: "FullStack Developer" },
     { label: "Data Science", value: "Data Science" },
+    { label: "Data Analyst", value: "Data Analyst" },
+    { label: "Business Analyst", value: "Business Analyst" },
 ]
 
-const salary = [
-    { label: "3-4", value: "3-4" },
-    { label: "4-10", value: "4-10" },
-    { label: "10-15", value: "10-15" },
-]
+// const salary = [
+//     { label: "3-4", value: "3-4" },
+//     { label: "4-10", value: "4-10" },
+//     { label: "10-15", value: "10-15" },
+// ]
 
 
 const PostJob = () => {
@@ -109,27 +112,9 @@ const PostJob = () => {
                                         ))}
                                     </SelectGroup>
                                 </SelectContent>
-                            </Select>
+                            </Select>                      
+                        </div>
                         
-                        </div>
-                       
-                         <div>
-                             <Label>Salary</Label>
-                            <Select onValueChange={(value) => selectFieldHandler("salary", value)}>
-                                <SelectTrigger className="w-[180px]">
-                                    <SelectValue placeholder="Salary" />
-                                </SelectTrigger>
-                                <SelectContent className='bg-gray-200 cursor-pointer'>
-                                    <SelectGroup>
-                                        {salary.map((item) => (
-                                            <SelectItem key={item.value} value={item.value}>
-                                                {item.label}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectGroup>
-                                </SelectContent>
-                            </Select>
-                        </div>
                         <div>
                              <Label>Location</Label>
                             <Select onValueChange={(value) => selectFieldHandler("location", value)}>
@@ -156,6 +141,17 @@ const PostJob = () => {
                                 value={input.jobType}
                                 onChange={changeEventHandler}
                                 placeholder="Full Time"
+                                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
+                            />
+                        </div>
+                        <div>
+                            <Label>Salary</Label>
+                            <Input
+                                type="text"
+                                name="salary"
+                                value={input.salary}
+                                onChange={changeEventHandler}
+                                placeholder="4,50,000"
                                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                             />
                         </div>
