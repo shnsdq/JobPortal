@@ -8,6 +8,6 @@ const router = express.Router();
 router.post('/register',verifyJwt,registerCompany);
 router.get('/get',verifyJwt,getCompany);
 router.get('/get/:id',verifyJwt,getCompanyById);
-router.put('/update/:id',verifyJwt,upload.single('file'),updateCompany);
+router.put('/update/:id',verifyJwt,upload.single("file"),updateCompany);
 
 export default router;
