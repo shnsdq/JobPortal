@@ -14,7 +14,7 @@ import { toast } from 'sonner'
 //const companyArray = [];
 
 const locations = [
-    { label: "Delhi NCR", value: "Delhi NCR" },
+    { label: "Delhi", value: "Delhi NCR" },
     { label: "Banglore", value: "Banglore" },
     { label: "Hyderabad", value: "Hyderabad" },
     { label: "Pune", value: "Pune" },
@@ -25,6 +25,7 @@ const title = [
     { label: "Frontend Developer", value: "Frontend Developer" },
     { label: "Backend Developer", value: "Backend Developer" },
     { label: "FullStack Developer", value: "FullStack Developer" },
+    { label: "Data Science", value: "Data Science" },
 ]
 
 const salary = [
@@ -94,6 +95,7 @@ const PostJob = () => {
                 <form onSubmit={submitHandler} className='p-8 max-w-4xl border border-gray-200 shadow-lg rounded-md '>
                     <div className='grid grid-cols-2 gap-2'>
                         <div>
+                             <Label>Title</Label>
                             <Select onValueChange={(value) => selectFieldHandler("title", value)}>
                                 <SelectTrigger className="w-[180px]">
                                     <SelectValue placeholder="Title" />
@@ -112,6 +114,7 @@ const PostJob = () => {
                         </div>
                        
                          <div>
+                             <Label>Salary</Label>
                             <Select onValueChange={(value) => selectFieldHandler("salary", value)}>
                                 <SelectTrigger className="w-[180px]">
                                     <SelectValue placeholder="Salary" />
@@ -128,6 +131,7 @@ const PostJob = () => {
                             </Select>
                         </div>
                         <div>
+                             <Label>Location</Label>
                             <Select onValueChange={(value) => selectFieldHandler("location", value)}>
                                 <SelectTrigger className="w-[180px]">
                                     <SelectValue placeholder="Location" />
@@ -223,7 +227,7 @@ const PostJob = () => {
                             : <Button type="submit" className="bg-black text-white cursor-pointer w-full my-4 ">Post New Job</Button>
                     }
                     {
-                        companies.length === 0 && <p className='text-xl text-red-600 font-bold text-center my-3'> *Please register a company first,before posting a job</p>
+                        companies.length === 0 && <p className='text-lg text-red-600 font-bold text-center my-3'> *Please register a company first,before posting a job</p>
                     }
                 </form>
             </div>
