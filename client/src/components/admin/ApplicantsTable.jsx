@@ -30,7 +30,7 @@ const ApplicantsTable = () => {
     return (
         <div>
             <Table>
-                <TableCaption>A list of applicants</TableCaption>
+                
                 <TableHeader>
                     <TableRow>
                         <TableHead>FullName</TableHead>
@@ -58,8 +58,8 @@ const ApplicantsTable = () => {
                                 <TableCell>{item?.applicant?.createdAt.split("T")[0]}</TableCell>
                                 <TableCell className='text-right cursor-pointer'>
                                     <Popover>
-                                        <PopoverTrigger><MoreHorizontal /></PopoverTrigger>
-                                        <PopoverContent className="w-32">
+                                        <PopoverTrigger><MoreHorizontal className='cursor-pointer' /></PopoverTrigger>
+                                        <PopoverContent className="w-32 bg-gray-300">
                                             {
                                                 shortListingStatus.map((status, index) => {
                                                     return (

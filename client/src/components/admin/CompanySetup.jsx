@@ -36,7 +36,9 @@ const CompanySetup = () => {
     }
 
     const changeFileHandler = (e) => {
-        setInput({ ...input, file: e.target.file?.[0] });
+        if (e.target.files && e.target.files.length > 0) {
+        setInput({ ...input, file: e.target.files[0] });
+    }
     }
 
 
@@ -77,7 +79,7 @@ const CompanySetup = () => {
             description: singleCompany?.description || "",
             website: singleCompany?.website || "",
             location: singleCompany?.location || "",
-            file: singleCompany?.file || null
+            file: null
         })
     }, [singleCompany])
 
@@ -87,7 +89,7 @@ const CompanySetup = () => {
             <div className='max-w-xl mx-auto my-10'>
                 <form onSubmit={submitHandler}>
                     <div className='flex items-center gap-5 p-8'>
-                        <Button onClick={() => navigate("/admin/companies")} variant="outline" className='flex items-center gap-2 text-gray-500 font-semibold'>
+                        <Button onClick={() => navigate("/admin/companies")} variant="outline" className='flex items-center gap-2 bg-black text-shadow-white font-semibold'>
                             <ArrowLeft />
                             <span>Back</span>
                         </Button>
