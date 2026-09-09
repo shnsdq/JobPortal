@@ -40,7 +40,7 @@ const CompaniesTable = () => {
                         <TableHead>Logo</TableHead>
                         <TableHead>Name</TableHead>
                         <TableHead>Date</TableHead>
-                        <TableHead className='text-right bg-gray-200'>Action</TableHead>
+                        <TableHead className='text-right'>Action</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -62,8 +62,8 @@ const CompaniesTable = () => {
                                 <TableCell className='text-right cursor-pointer'>
                                     <Popover>
                                         <PopoverTrigger><MoreHorizontal /></PopoverTrigger>
-                                        <PopoverContent className="w-32">
-                                            <div onClick={() => navigate(`/admin/companies/${company._id}`)} className='flex items-center gap-2 w-fit cursor-pointer'>
+                                        <PopoverContent className="w-28 cursor-pointer">
+                                            <div onClick={() => navigate(`/admin/companies/${company._id}`)} className='flex items-center gap-2 w-fit bg-gray-200 cursor-pointer'>
                                                 <Edit2 className='w-4' />
                                                 <span>Edit</span>
                                             </div>

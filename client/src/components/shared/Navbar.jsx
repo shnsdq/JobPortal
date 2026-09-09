@@ -41,8 +41,9 @@ const Navbar = () => {
                 <div className='flex items-center gap-12'>
                     <ul className='flex font-medium items-center gap-5'>
                         {
-                            user && user.role === 'recruiter' ? (
-                                <>
+                            user && user.role === 'recruiter'
+                                ? (
+                                     <>
                                     <li><Link to='/admin/companies'>Companies</Link></li>
                                     <li><Link to='/admin/jobs'>Jobs</Link></li>
                                 </>
@@ -83,7 +84,7 @@ const Navbar = () => {
                                             </div>
 
                                         </div>
-                                        <div className='flex flex-col gap-3 my-2 text-gray-600'>
+                                        <div className='flex flex-col gap-3 my-2 '>
                                             {
                                                 user && user.role === 'student' && (
                                                     <div className='flex w-fit items-center gap-2 cursor-pointer'>
@@ -93,7 +94,7 @@ const Navbar = () => {
                                                 )
                                             }
                                             
-                                            <div className='flex w-fit items-center gap-2 cursor-pointer'>
+                                            <div className='flex w-fit items-center gap-2 bg-black text-white cursor-pointer'>
                                                 <LogOut />
                                                 <Button onClick={logoutHandler} variant="link">Logout</Button>
                                             </div>
