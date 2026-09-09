@@ -20,8 +20,8 @@ const AppliedJobTable = () => {
         </TableHeader>
         <TableBody>
           {
-            allAppliedJobs.length === 0 ?
-             (
+            allAppliedJobs.length === 0 
+            ? (
               <TableRow>
                 <TableCell colSpan={4} className='text-center'>No applied jobs</TableCell>
               </TableRow>

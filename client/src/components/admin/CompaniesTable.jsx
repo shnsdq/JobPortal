@@ -23,7 +23,7 @@ const CompaniesTable = () => {
         });
 
         setFilterCompany(filteredCompany);
-        
+
     }, [companies, searchCompanyByText])
 
     return (
@@ -35,12 +35,17 @@ const CompaniesTable = () => {
                         <TableHead>Logo</TableHead>
                         <TableHead>Name</TableHead>
                         <TableHead>Date</TableHead>
-                        <TableHead className='text-right'>Action</TableHead>
+                        <TableHead className='text-right bg-gray-200'>Action</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {
-                        filterCompany.map((company) => (
+                    {filterCompany.length === 0
+                        ? (
+                            <TableRow>
+                                <TableCell colSpan={4} className='text-center'>No Companies registered</TableCell>
+                            </TableRow>
+                        )
+                        : filterCompany.map((company) => (
                             <tr key={company._id}>
                                 <TableCell>
                                     <Avatar>
