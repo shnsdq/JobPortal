@@ -61,7 +61,7 @@ const CompaniesTable = () => {
                                 <TableCell>{company?.createdAt?.split("T")[0]}</TableCell>
                                 <TableCell className='text-right cursor-pointer'>
                                     <Popover>
-                                        <PopoverTrigger><MoreHorizontal /></PopoverTrigger>
+                                        <PopoverTrigger><MoreHorizontal className="cursor-pointer" /></PopoverTrigger>
                                         <PopoverContent className="w-28 bg-gray-300">
                                             <div onClick={() => navigate(`/admin/companies/${company._id}`)} className='flex items-center gap-2 w-fit cursor-pointer'>
                                                 <Edit2 className='w-4' />

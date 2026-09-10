@@ -79,7 +79,7 @@ const CompanySetup = () => {
             description: singleCompany?.description || "",
             website: singleCompany?.website || "",
             location: singleCompany?.location || "",
-            file: null
+            file: singleCompany?.file || null
         })
     }, [singleCompany])
 
@@ -89,7 +89,7 @@ const CompanySetup = () => {
             <div className='max-w-xl mx-auto my-10'>
                 <form onSubmit={submitHandler}>
                     <div className='flex items-center gap-5 p-8'>
-                        <Button onClick={() => navigate("/admin/companies")} variant="outline" className='flex items-center gap-2 bg-black text-shadow-white font-semibold'>
+                        <Button onClick={() => navigate("/admin/companies")} variant="outline" className='flex items-center gap-2 bg-black text-white font-semibold'>
                             <ArrowLeft />
                             <span>Back</span>
                         </Button>
@@ -139,6 +139,7 @@ const CompanySetup = () => {
                                 name="file"
                                 accept="image/*"
                                 onChange={changeFileHandler}
+                                className="cursor-pointer"
                             />
                         </div>
                     </div>
