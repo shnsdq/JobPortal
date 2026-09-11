@@ -30,14 +30,14 @@ const CategoryCarousal = () => {
                     {
                         category.map((cat, index) => (
                             <CarouselItem key={index} className="md:basis-1/2 lg-basis-1/3">
-                                <Button onClick={()=> searchJobHandler(cat)} variant='outline' className='rounded-full'>{cat}</Button>
+                                <Button onClick={()=> searchJobHandler(cat)} variant='outline' className='rounded-full cursor-pointer'>{cat}</Button>
                             </CarouselItem>
                         ))
                     }
 
                 </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious className="cursor-pointer" />
+                <CarouselNext className="cursor-pointer"/>
             </Carousel>
         </div>
     )
