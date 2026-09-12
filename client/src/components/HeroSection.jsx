@@ -22,12 +22,12 @@ const HeroSection = () => {
         <h1 className='text-5xl font-bold'>Search, Apply &<br />Get Your <span className='text-[#6A38C2]'>Dream Jobs</span></h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt earum voluptatem nostrum odit id.
         </p>
-        <div className='flex w-[40%] shadow-lg border-gray-200 pl-3 rounded-full items-center gap-4 m-auto'>
+        <div className='flex sm:w-[40%] shadow-lg border-gray-200 pl-3 rounded-full items-center gap-4 m-auto'>
           <input
             type="text"
             placeholder='Search job'
             onChange={(e) => setQuery(e.target.value)}
-            className='outline-none border-none w-full'
+            className='w-40 outline-none border-none sm:w-full'
           />
           <Button onClick={searchJobHandler} className='rounded-r-full bg-[#6A38C2] cursor-pointer'>
             <Search className='h-5 w-5' />
