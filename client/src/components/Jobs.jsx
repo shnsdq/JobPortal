@@ -39,8 +39,8 @@ const Jobs = () => {
   return (
     <div>
       <Navbar />
-      <div className='max-w-7xl mx-auto mt-5'>
-        <div className='flex gap-5'>
+      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
+        
           <div className='w-20%'>
             <FilterCard />
           </div>
@@ -48,8 +48,9 @@ const Jobs = () => {
             filterJobs.length === 0
               ? <span>Job not found</span>
               : (
-                <div className='flex-1 h-[88vh] overflow-y-auto pb-5'>
-                  <div className='grid grid-cols-3 gap-4'>
+                <div className='flex-1 h-[88vh] pb-5'>
+                  <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-y-6 items-stretch'>
+
                     {
                       filterJobs.map((job) => (
                         <motion.div
@@ -59,7 +60,7 @@ const Jobs = () => {
                           transition={{ duration: 0.3 }}
                           key={job?._id}>
 
-                          <Job job={job} />
+                          <Job job={job} className="h-full" />
                         </motion.div>
                       ))
                     }
@@ -67,7 +68,7 @@ const Jobs = () => {
                 </div>
               )
           }
-        </div>
+        
       </div>
     </div>
   )
