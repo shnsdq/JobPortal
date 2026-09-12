@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 import { Avatar, AvatarImage } from '../ui/avatar'
 import { Button } from "../ui/button"
@@ -10,9 +10,13 @@ import axios from 'axios'
 import { USER_API_END_POINT } from '../../utils/constant'
 import { toast } from 'sonner'
 import profilePic from '../../assets/profile.jpg'
+import menu_icon from '../../assets/menu_icon.png'
+import dropdown_icon from '../../assets/dropdown_icon.png'
 
 const Navbar = () => {
-    
+
+    const [visible, setVisible] = useState(false);
+
     const { user } = useSelector(store => store.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -38,22 +42,22 @@ const Navbar = () => {
                 <div>
                     <h1 className='text-2xl font-bold'>Job<span className='text-[#F83002]'>Portal</span></h1>
                 </div>
-                <div className='flex items-center gap-12'>
-                    <ul className='flex font-medium items-center gap-5'>
+                <div className='flex items-center font-medium py-5 gap-4'>
+                    <ul className='hidden sm:flex gap-5 text-sm text-gray-700'>
                         {
                             user && user.role === 'recruiter'
                                 ? (
-                                     <>
-                                    <li><Link to='/admin/companies'>Companies</Link></li>
-                                    <li><Link to='/admin/jobs'>Jobs</Link></li>
-                                </>
-                            ) : (
-                                <>
-                                    <li><Link to='/'>Home</Link></li>
-                                    <li><Link to='/jobs'>Jobs</Link></li>
-                                    <li><Link to='/browse'>Browse</Link></li>
-                                </>
-                            )
+                                    <>
+                                        <li><Link to='/admin/companies'>Companies</Link></li>
+                                        <li><Link to='/admin/jobs'>Jobs</Link></li>
+                                    </>
+                                ) : (
+                                    <>
+                                        <li><Link to='/'>Home</Link></li>
+                                        <li><Link to='/jobs'>Jobs</Link></li>
+                                        <li><Link to='/browse'>Browse</Link></li>
+                                    </>
+                                )
                         }
 
 
@@ -62,14 +66,14 @@ const Navbar = () => {
                         !user ? (
                             <div className='flex items-center gap-2'>
                                 <Link to="/login"><Button variant="outline" className='cursor-pointer '>Login</Button></Link>
-                                <Link to="/signup"> <Button variant="outline" className='cursor-pointer '>Signup</Button></Link>
+                                {/* <Link to="/signup"> <Button variant="outline" className='cursor-pointer '>Signup</Button></Link> */}
 
                             </div>
                         ) : (
                             <Popover>
                                 <PopoverTrigger asChild>
                                     <Avatar className="cursor-pointer">
-                                        <AvatarImage src={user?.profile?.profilePhoto ? user?.profile?.profilePhoto : profilePic  } alt="photo" />
+                                        <AvatarImage src={user?.profile?.profilePhoto ? user?.profile?.profilePhoto : profilePic} alt="photo" />
                                     </Avatar>
                                 </PopoverTrigger>
                                 <PopoverContent className="w-75 py-3 px-5 bg-slate-100 text-gray-500 rounded">
@@ -93,8 +97,8 @@ const Navbar = () => {
                                                     </div>
                                                 )
                                             }
-                                            
-                                            <div className='flex w-fit items-center gap-2 bg-black text-white cursor-pointer'>
+
+                                            <div className='flex w-fit items-center gap-2 cursor-pointer'>
                                                 <LogOut />
                                                 <Button onClick={logoutHandler} variant="link">Logout</Button>
                                             </div>
@@ -104,6 +108,34 @@ const Navbar = () => {
                             </Popover>
                         )
                     }
+
+                    <img onClick={() => setVisible(true)} src={menu_icon} className='w-5 cursor-pointer sm:hidden' alt="" />
+                </div>
+
+                 {/* Sidebar menu for small screens */}
+                <div className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${visible ? 'w-full' : 'w-0'}`} >
+                    <div className='flex flex-col text-gray-600'>
+                        <div onClick={() => setVisible(false)} className='flex items-center gap-4 p-3 cursor-pointer'>
+                            <img className='h-4 rotate-180' src={dropdown_icon} alt="" />
+                            <p>Back</p>
+                        </div>
+                        {
+                            user && user.role === 'recruiter'
+                                ? (
+                                    <>
+                                        <li><Link onClick={() => setVisible(false)} className='py-2 pl-6' to='/admin/companies'>Companies</Link></li>
+                                        <li><Link onClick={() => setVisible(false)} className='py-2 pl-6' to='/admin/jobs'>Jobs</Link></li>
+                                    </>
+                                ) : (
+                                    <>
+                                        <li><Link onClick={() => setVisible(false)} className='py-2 pl-6' to='/'>Home</Link></li>
+                                        <li><Link onClick={() => setVisible(false)} className='py-2 pl-6 ' to='/jobs'>Jobs</Link></li>
+                                        <li><Link onClick={() => setVisible(false)} className='py-2 pl-6 ' to='/browse'>Browse</Link></li>
+                                    </>
+                                )
+                        }
+
+                    </div>
                 </div>
             </div>
         </div>
