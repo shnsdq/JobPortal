@@ -112,31 +112,33 @@ const Navbar = () => {
                     <img onClick={() => setVisible(true)} src={menu_icon} className='w-5 cursor-pointer sm:hidden' alt="" />
                 </div>
 
-                 {/* Sidebar menu for small screens */}
-                <div className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${visible ? 'w-full' : 'w-0'}`} >
+                {/* Sidebar menu for small screens */}
+
+                <div className={`fixed top-0 right-0 bottom-0 overflow-hidden bg-white transition-all z-50 ${visible ? 'w-full' : 'w-0'}`} >
                     <div className='flex flex-col text-gray-600'>
                         <div onClick={() => setVisible(false)} className='flex items-center gap-4 p-3 cursor-pointer'>
                             <img className='h-4 rotate-180' src={dropdown_icon} alt="" />
                             <p>Back</p>
                         </div>
+
                         {
                             user && user.role === 'recruiter'
                                 ? (
-                                    <>
-                                        <li><Link onClick={() => setVisible(false)} className='py-2 pl-6' to='/admin/companies'>Companies</Link></li>
-                                        <li><Link onClick={() => setVisible(false)} className='py-2 pl-6' to='/admin/jobs'>Jobs</Link></li>
-                                    </>
+                                    <div className='flex flex-col'>
+                                        <Link onClick={() => setVisible(false)} className='py-2 pl-6 border-b' to='/admin/companies'>Companies</Link>
+                                        <Link onClick={() => setVisible(false)} className='py-2 pl-6 border-b' to='/admin/jobs'>Jobs</Link>
+                                    </div>
                                 ) : (
-                                    <>
-                                        <li><Link onClick={() => setVisible(false)} className='py-2 pl-6' to='/'>Home</Link></li>
-                                        <li><Link onClick={() => setVisible(false)} className='py-2 pl-6 ' to='/jobs'>Jobs</Link></li>
-                                        <li><Link onClick={() => setVisible(false)} className='py-2 pl-6 ' to='/browse'>Browse</Link></li>
-                                    </>
+                                    <div className='flex flex-col'>
+                                        <Link onClick={() => setVisible(false)} className='py-2 pl-6 border-b' to='/'>Home</Link>
+                                        <Link onClick={() => setVisible(false)} className='py-2 pl-6 border-b' to='/jobs'>Jobs</Link>
+                                        <Link onClick={() => setVisible(false)} className='py-2 pl-6 border-b' to='/browse'>Browse</Link>
+                                    </div>
                                 )
                         }
-
                     </div>
                 </div>
+
             </div>
         </div>
     )
