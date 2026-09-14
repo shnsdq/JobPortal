@@ -31,7 +31,7 @@ const JobDescription = () => {
         const res = await axios.get(`${JOB_API_END_POINT}/get/${jobId}`, { withCredentials: true });
         if (res.data.success) {
           dispatch(setSingleJob(res.data.job));
-          setIsApplied(res.data.job.applications.some(application => application.applicant === user?._id)) //ensure the state is in sync with fetched data
+          setIsApplied(res.data.job.applications.some(application => application.applicant === user?._id)) //ensuring state is in sync with fetched data
         }
       } catch (error) {
         console.log(error)
@@ -47,10 +47,10 @@ const JobDescription = () => {
       const res = await axios.get(`${APPLICATION_API_END_POINT}/apply/${jobId}`, { withCredentials: true });
       
       if(res.data.success){
-       setIsApplied(true); //update the local state
-      
+       setIsApplied(true); //update the local state     
        const updateSingleJob = {...singleJob,applications:[...singleJob.applications,{applicant:user?._id}]}
        dispatch(setSingleJob(updateSingleJob)); //helps us in real time update 
+       
        toast.success(res.data.message);
       }
 
@@ -62,36 +62,86 @@ const JobDescription = () => {
 
  
   return (
-    <div className='max-w-7xl mx-auto my-10'>
-      <div className='flex items-center justify-between'>
+    <div className='max-w-7xl mx-auto my-10 px-4 sm:px-6 lg:px-8'>
+      
+      <div className='flex flex-col gap-4 md:flex-row md:items-center md:justify-between pb-6'>
         <div>
-          <h1 className='font-bold text-xl'>{singleJob?.company?.name}</h1>
-          <h2 className='font-bold text-xl'>{singleJob?.title}</h2>
-          <div className='flex items-center gap-2 mt-4'>
-            <Badge className='text-blue-700 font-bold' variant="ghost">{singleJob?.position}</Badge>
-            <Badge className=' text-[#F83002] font-bold' variant="ghost">{singleJob?.jobType}</Badge>
-            <Badge className='text-[#7209b7] font-bold' variant="ghost">{singleJob?.salary}</Badge>
+          <h1 className='font-bold text-lg sm:text-xl text-gray-600'>{singleJob?.company?.name}</h1>
+          <h2 className='font-bold text-2xl sm:text-3xl mt-1 text-gray-900'>{singleJob?.title}</h2>
+          
+          <div className='flex flex-wrap items-center gap-2 mt-4'>
+            <Badge className='text-blue-700 font-bold bg-blue-50' variant="ghost">Openings: {singleJob?.position} </Badge>
+            <Badge className='text-[#F83002] font-bold bg-red-50' variant="ghost">{singleJob?.jobType}</Badge>
+            <Badge className='text-[#7209b7] font-bold bg-purple-50' variant="ghost">₹{singleJob?.salary} Lakh</Badge>
           </div>
         </div>
+        
         <Button 
-        onClick={isApplied ? null : applyJobHandler}
-        disabled={isApplied}
-          className={`rounded-lg ${isApplied ? 'bg-gray-600 cursor-not-allowed' : 'bg-[#7209b7] hover:bg-[#5f32ad]'}`}>
+          onClick={isApplied ? null : applyJobHandler}
+          disabled={isApplied}
+          className={`w-full md:w-auto px-6 py-3 rounded-lg text-center font-medium shadow-sm transition-all ${
+            isApplied ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-[#7209b7] text-white hover:bg-[#5f32ad]'
+          }`}
+        >
           {isApplied ? 'Already Applied' : "Apply Now"}
         </Button>
       </div>
-      <h1 className='border-b-2 border-b-gray-300 font-medium py-4'>Job Description</h1>
-      <div className='my-4 '>
-        <h1 className='font-bold my-1'>Role: <span className='pl-4 font-normal text-gray-800'>{singleJob?.title}</span></h1>
-        <h1 className='font-bold my-1'>Location: <span className='pl-4 font-normal text-gray-800'>{singleJob?.location}</span></h1>
-        <h1 className='font-bold my-1'>Description: <span className='pl-4 font-normal text-gray-800'>{singleJob?.description}</span></h1>
-        <h1 className='font-bold my-1'>Experience: <span className='pl-4 font-normal text-gray-800'>{singleJob?.experienceLevel}</span></h1>
-        <h1 className='font-bold my-1'>Salary: <span className='pl-4 font-normal text-gray-800'> {singleJob?.salary}</span></h1>
-        <h1 className='font-bold my-1'>Total Applications: <span className='pl-4 font-normal text-gray-800'> {singleJob?.applications?.length}</span></h1>
-        <h1 className='font-bold my-1'>Posted Date: <span className='pl-4 font-normal text-gray-800'>{singleJob?.createdAt?.split("T")[0]}</span></h1>
+
+      <h3 className='border-b-2 border-b-gray-200 font-semibold text-lg py-4 text-gray-800'>
+        Job Description
+      </h3>
+      
+      {/* Detail Fields grid/stack */}
+      <div className='my-6 space-y-4'>
+        <div className='flex flex-col sm:flex-row sm:items-baseline border-b border-gray-50 pb-2'>
+          <span className='font-bold text-gray-700'>Role:</span>
+          <span className='sm:pl-1 font-normal text-gray-600'>{singleJob?.title}</span>
+        </div>
+        
+        <div className='flex flex-col sm:flex-row sm:items-baseline border-b border-gray-50 pb-2'>
+          <span className='font-bold text-gray-700'>Location:</span>
+          <span className='sm:pl-1 font-normal text-gray-600'>{singleJob?.location}</span>
+        </div>
+        
+        <div className='flex flex-col sm:flex-row sm:items-baseline border-b border-gray-50 pb-2'>
+          <span className='font-bold text-gray-700'>Description:</span>
+          <span className='sm:pl-1 font-normal text-gray-600 leading-relaxed'>{singleJob?.description}</span>
+        </div>
+        
+        <div className='flex flex-col sm:flex-row sm:items-baseline border-b border-gray-50 pb-2'>
+          <span className='font-bold text-gray-700'>Experience:</span>
+          <span className='sm:pl-1 font-normal text-gray-600'>{singleJob?.experienceLevel} Years</span>
+        </div>
+        
+        <div className='flex flex-col sm:flex-row sm:items-baseline border-b border-gray-50 pb-2'>
+          <span className='font-bold text-gray-700 mb-2 sm:mb-0'>Requirements:</span>
+          <div className='sm:pl-1 flex flex-wrap gap-1.5'>
+            {singleJob?.requirements?.map((item, index) => (
+              <Badge key={index} className="bg-gray-200 text-gray-800 border-none">
+                {item}
+              </Badge>
+            ))}
+          </div>
+        </div>       
+        
+        <div className='flex flex-col sm:flex-row sm:items-baseline border-b border-gray-50 pb-2'>
+          <span className='font-bold text-gray-700'>Salary:</span>
+          <span className='sm:pl-1 font-normal text-gray-600'>₹{singleJob?.salary}</span>
+        </div>
+        
+        <div className='flex flex-col sm:flex-row sm:items-baseline border-b border-gray-50 pb-2'>
+          <span className='font-bold text-gray-700'>Applicants:</span>
+          <span className='sm:pl-1 font-normal text-gray-600'>{singleJob?.applications?.length}</span>
+        </div>
+        
+        <div className='flex flex-col sm:flex-row sm:items-baseline pb-2'>
+          <span className='font-bold text-gray-700'>Posted Date:</span>
+          <span className='sm:pl-1 font-normal text-gray-600'>{singleJob?.createdAt?.split("T")[0]}</span>
+        </div>
       </div>
     </div>
   )
 }
 
 export default JobDescription
+
