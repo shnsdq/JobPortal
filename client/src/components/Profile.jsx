@@ -182,7 +182,7 @@ const Profile = () => {
       </div>
 
       {/* Applied Jobs Section */}
-      <div className='max-w-4xl mx-auto bg-white rounded-2xl p-4 sm:p-0 mx-4 sm:mx-auto'>
+      <div className='max-w-4xl bg-white rounded-2xl p-4 sm:p-0 mx-4 sm:mx-auto'>
         <h1 className='font-bold text-lg my-5'>Applied Jobs</h1>
         {/* Responsive wrapper for the table component */}
         <div className='overflow-x-auto w-full'>
