@@ -20,17 +20,17 @@ const ApplicantsTable = () => {
                 toast.success(res.data.message)
             }
         } catch (error) {
-             console.error(error);
-        // error message with fallback text
-        const errorMessage = error?.response?.data?.message || "Something went wrong changing status";
-        toast.error(errorMessage);
+            console.error(error);
+            // error message with fallback text
+            const errorMessage = error?.response?.data?.message || "Something went wrong changing status";
+            toast.error(errorMessage);
         }
     }
 
     return (
-        <div>
-            <Table>
-                
+        <div className='w-full overflow-x-auto rounded-md border'>
+            <Table className="min-w-[800px] w-full">
+
                 <TableHeader>
                     <TableRow>
                         <TableHead>FullName</TableHead>
@@ -42,18 +42,25 @@ const ApplicantsTable = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {
+                    {applicants.length === 0 ? (
+                        <TableRow>
+                            {/* dynamic colSpan to match active columns */}
+                            <TableCell colSpan={6} className='text-center py-8 text-muted-foreground'>
+                                No Applicants
+                            </TableCell>
+                        </TableRow>
+                    ) :
                         applicants && applicants?.applications?.map((item) => (
-                            <tr key={item._id}>
+                            <TableRow key={item._id}>
                                 <TableCell>{item?.applicant?.fullname}</TableCell>
                                 <TableCell>{item?.applicant?.email}</TableCell>
                                 <TableCell>{item?.applicant?.phoneNumber}</TableCell>
                                 <TableCell >
                                     {
-                                      item?.applicant?.profile?.resume ? 
-                                      <a className='text-blue-600 cursor-pointer' href={item?.applicant?.profile?.resume} target="_blank" rel="noopener noreferrer">
-                                        {item?.applicant?.profile?.resumeOriginalName}</a> 
-                                      : <span>NA</span>
+                                        item?.applicant?.profile?.resume ?
+                                            <a className='text-blue-600 cursor-pointer' href={item?.applicant?.profile?.resume} target="_blank" rel="noopener noreferrer">
+                                                {item?.applicant?.profile?.resumeOriginalName}</a>
+                                            : <span>NA</span>
                                     }</TableCell>
                                 <TableCell>{item?.applicant?.createdAt.split("T")[0]}</TableCell>
                                 <TableCell className='text-right cursor-pointer'>
@@ -73,7 +80,7 @@ const ApplicantsTable = () => {
                                         </PopoverContent>
                                     </Popover>
                                 </TableCell>
-                            </tr>
+                            </TableRow>
                         ))
                     }
                 </TableBody>
