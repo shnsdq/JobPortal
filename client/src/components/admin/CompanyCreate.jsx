@@ -60,7 +60,7 @@ const CompanyCreate = () => {
           value={companyName}
           placeholder="JobHunt, Microsoft etc."
           onChange={(e) => setCompanyName(e.target.value)}
-          className='my-2'
+          className='w-75 sm:w-full my-2'
         />
 
         <div className='flex items-center gap-2 my-10'>

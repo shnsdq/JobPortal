@@ -95,7 +95,7 @@ const CompanySetup = () => {
                         </Button>
                         <h1 className='font-bold text-xl'>Company Setup</h1>
                     </div>
-                    <div className='grid grid-cols-2 gap-4'>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
                         <div>
                             <Label>Company Name</Label>
                             <Input
