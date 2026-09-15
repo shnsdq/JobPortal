@@ -92,7 +92,7 @@ const JobDescription = () => {
       </h3>
       
       {/* Detail Fields grid/stack */}
-      <div className='my-6 space-y-4'>
+      <div className='my-6 space-y-1'>
         <div className='flex flex-col sm:flex-row sm:items-baseline border-b border-gray-50 pb-2'>
           <span className='font-bold text-gray-700'>Role:</span>
           <span className='sm:pl-1 font-normal text-gray-600'>{singleJob?.title}</span>
@@ -110,14 +110,14 @@ const JobDescription = () => {
         
         <div className='flex flex-col sm:flex-row sm:items-baseline border-b border-gray-50 pb-2'>
           <span className='font-bold text-gray-700'>Experience:</span>
-          <span className='sm:pl-1 font-normal text-gray-600'>{singleJob?.experienceLevel} Years</span>
+          <span className='sm:pl-1 font-normal text-gray-600'>{singleJob?.experienceLevel} Year(s)</span>
         </div>
         
         <div className='flex flex-col sm:flex-row sm:items-baseline border-b border-gray-50 pb-2'>
           <span className='font-bold text-gray-700 mb-2 sm:mb-0'>Requirements:</span>
           <div className='sm:pl-1 flex flex-wrap gap-1.5'>
             {singleJob?.requirements?.map((item, index) => (
-              <Badge key={index} className="bg-gray-200 text-gray-800 border-none">
+              <Badge key={index} className="bg-gray-200 text-gray-800 border-none m-2">
                 {item}
               </Badge>
             ))}
@@ -135,7 +135,7 @@ const JobDescription = () => {
         </div>
         
         <div className='flex flex-col sm:flex-row sm:items-baseline pb-2'>
-          <span className='font-bold text-gray-700'>Posted Date:</span>
+          <span className='font-bold text-gray-700'>Posted: </span>
           <span className='sm:pl-1 font-normal text-gray-600'>{singleJob?.createdAt?.split("T")[0]}</span>
         </div>
       </div>
