@@ -70,7 +70,7 @@ function Signup() {
       console.log(error)
       const errMsg = error.response?.data?.message || "Server Connection failed";
       toast.error(errMsg)
-      
+
     } finally {
       dispatch(setLoading(false));
     }
@@ -86,51 +86,62 @@ function Signup() {
   return (
     <div>
       <Navbar />
-      <div className='flex items-center justify-center max-w-7xl mx-auto'>
-        <form onSubmit={SubmitHandler} className='w-1/2 border border-gray-200 rounded-md p-4 my-10'>
-          <h1 className='font-bold text-xl mb-5'>Sign up</h1>
-          <div className='my-2'>
-            <Label>Full Name</Label>
+      <div>
+        <form onSubmit={SubmitHandler} className='flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-8 gap-2 text-gray-800'>
+          <div className='inline-flex items-center gap-2 mb-2 mt-8'>
+            <p className='prata-regular text-3xl'>Sign Up </p>
+            <hr className='border-none h-[1.5px] w-8 bg-gray-800 ' />
+          </div>
+            
             <Input
               type="text"
               value={input.fullname}
               name="fullname"
               onChange={changeEventHandler}
               placeholder="FullName"
-            />
-          </div>
-          <div className='my-2'>
-            <Label>Email</Label>
+              className='w-full px-3 py-2 border border-gray-800'
+              />
+                       
             <Input
               type="email"
               value={input.email}
               name="email"
               onChange={changeEventHandler}
-              placeholder="xyz@gmail.com"
+              placeholder="Email"
+               className='w-full px-3 py-2 border border-gray-800'
             />
-          </div>
-          <div className='my-2'>
-            <Label>Phone Number</Label>
+           
             <Input
               type="text"
               value={input.phoneNumber}
               name="phoneNumber"
               onChange={changeEventHandler}
-              placeholder="3456987000"
+              placeholder="Phone No."
+               className='w-full px-3 py-2 border border-gray-800'
             />
-          </div>
-          <div className='my-2'>
-            <Label>Password</Label>
+          
             <Input
               type="password"
               value={input.password}
               name="password"
               onChange={changeEventHandler}
               placeholder="Password"
+               className='w-full px-3 py-2 border border-gray-800'
+            />
+          
+          <div className='flex flex-col sm:flex-row my-1'>
+            <Label>Profile Picture</Label>
+            <Input
+              accept="image/*"
+              type="file"
+              onChange={changeFileHandler}
+              
+             className='w-full px-3 py-2 border border-gray-800'
             />
           </div>
+
           <div className='flex items-center justify-between gap-4'>
-            <RadioGroup className='flex items-center gap-4 my-5'>
+            <RadioGroup className='flex items-center gap-2 my-1'>
               <div className="flex items-center space-x-2">
                 <Input
                   type="radio"
@@ -153,20 +164,14 @@ function Signup() {
                 />
                 <Label htmlFor="r2">Recruiter</Label>
               </div>
-
             </RadioGroup>
-            <div className='flex items-center gap-2'>
-              <Label>Profile Picture</Label>
-              <Input
-                accept="image/*"
-                type="file"
-                onChange={changeFileHandler}
-                className="cursor-pointer p-2 rounded-md"
-              />
-            </div>
+
           </div>
+
           {
-            loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait </Button> : <Button type="submit" className="bg-black text-white rounded-md cursor-pointer w-full my-4">Signup</Button>
+            loading 
+            ? <Button className="w-full my-1"> <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait </Button> 
+            : <Button type="submit" className="bg-black text-white rounded-md cursor-pointer w-full my-1">Signup</Button>
           }
           <span className='text-sm'>Already have an account? <Link to="/login" className="text-blue-600">Login</Link></span>
         </form>
