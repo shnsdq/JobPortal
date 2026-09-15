@@ -32,15 +32,16 @@ const CompaniesTable = () => {
     }, [companies, searchCompanyByText])
 
     return (
-        <div>
+        <div className="w-full overflow-x-auto rounded-md border border-gray-200">
+        <div className="min-w-[600px] w-full">
             <Table>
                 
                 <TableHeader>
                     <TableRow>
-                        <TableHead>Logo</TableHead>
-                        <TableHead>Name</TableHead>
-                        <TableHead>Date</TableHead>
-                        <TableHead className='text-right'>Action</TableHead>
+                        <TableHead  className="w-[10%]">Logo</TableHead>
+                        <TableHead  className="w-[30%]">Name</TableHead>
+                        <TableHead  className="w-[10%]">Date</TableHead>
+                        <TableHead className='text-right w-[10%]'>Action</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -75,6 +76,7 @@ const CompaniesTable = () => {
                     }
                 </TableBody>
             </Table>
+        </div>
         </div>
     )
 }

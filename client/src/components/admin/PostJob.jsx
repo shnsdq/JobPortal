@@ -145,7 +145,7 @@ const PostJob = () => {
                                 name="salary"
                                 value={input.salary}
                                 onChange={changeEventHandler}
-                                placeholder="4,50,000"
+                                placeholder="4"
                                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                             />
                         </div>
