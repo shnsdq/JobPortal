@@ -65,33 +65,34 @@ function Login() {
   return (
     <div>
       <Navbar />
-      <div className='flex items-center justify-center max-w-7xl mx-auto'>
-        <form onSubmit={submitHandler} className='w-1/2 border border-gray-200 rounded-md p-4 my-10'>
-          <h1 className='font-bold text-xl mb-5'>Login</h1>
+      <div>
+        <form onSubmit={submitHandler} className='flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-8 gap-2 text-gray-800'>
 
-          <div className='my-2'>
-            <Label>Email</Label>
-            <Input
-              type="email"
-              value={input.email}
-              name="email"
-              onChange={changeEventHandler}
-              placeholder="xyz@gmail.com"
-            />
+          <div className='inline-flex items-center gap-2 mb-2 mt-8'>
+            <p className='prata-regular text-3xl'>Login </p>
+            <hr className='border-none h-[1.5px] w-8 bg-gray-800 ' />
           </div>
 
-          <div className='my-2'>
-            <Label>Password</Label>
+          <Input
+            type="email"
+            value={input.email}
+            name="email"
+            onChange={changeEventHandler}
+            placeholder="Email"
+            className='w-full px-3 py-2 border border-gray-800'
+          />
+
             <Input
               type="password"
               value={input.password}
               name="password"
               onChange={changeEventHandler}
               placeholder="Password"
+               className='w-full px-3 py-2 border border-gray-800'
             />
-          </div>
+          
           <div className='flex items-center justify-between'>
-            <RadioGroup className='flex items-center gap-4 my-5'>
+            <RadioGroup className='flex items-center gap-4 my-1'>
               <div className="flex items-center space-x-2">
                 <Input
                   type="radio"
