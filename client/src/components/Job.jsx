@@ -17,7 +17,7 @@ const Job = ({ job }) => {
   }
 
   return (
-    <div className='p-5 rounded-md shadow-xl bg-white border-gray-100 h-full'>
+    <div className='p-5 rounded-md shadow-xl bg-white border-gray-100 h-full flex flex-col justify-between'>
       <div className='flex items-center justify-between'>
         <p className='text-sm text-gray-500'>{daysAgoFunction(job?.createdAt) === 0 ? "Today" : `${daysAgoFunction(job?.createdAt)} days ago`}</p>
         
@@ -38,7 +38,7 @@ const Job = ({ job }) => {
       <div>
         <h1 className='font-bold text-lg my-2'>{job?.title}</h1>
           
-        <p className='text-sm text-gray-600'>{job?.description}</p>
+        <p className='text-sm text-gray-600 line-clamp-4'>{job?.description}</p>
       
       </div>
       <div className='flex items-center gap-2 mt-4'>

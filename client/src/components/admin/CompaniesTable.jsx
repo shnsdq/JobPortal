@@ -62,10 +62,11 @@ const CompaniesTable = () => {
                                 <TableCell>{company?.createdAt?.split("T")[0]}</TableCell>
                                 <TableCell className='text-right cursor-pointer'>
                                     <Popover>
-                                        <PopoverTrigger><MoreHorizontal className="cursor-pointer" /></PopoverTrigger>
-                                        <PopoverContent className="w-28 bg-gray-300">
-                                            <div onClick={() => navigate(`/admin/companies/${company._id}`)} className='flex items-center gap-2 w-fit cursor-pointer'>
-                                                <Edit2 className='w-4' />
+                                        <PopoverTrigger className="p-1 rounded-md hover:bg-gray-100 transition-colors">
+                                            <MoreHorizontal className="cursor-pointer mx-auto sm:mr-0" /></PopoverTrigger>
+                                        <PopoverContent className="w-36 p-2 bg-white border border-gray-200 shadow-md">
+                                            <div onClick={() => navigate(`/admin/companies/${company._id}`)} className='flex items-center gap-2 w-full px-2 py-1.5 text-sm rounded-sm hover:bg-gray-100 cursor-pointer text-gray-700'>
+                                                <Edit2 className='w-4 h-4' />
                                                 <span>Edit</span>
                                             </div>
                                         </PopoverContent>
