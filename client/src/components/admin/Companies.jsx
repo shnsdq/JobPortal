@@ -24,7 +24,7 @@ const Companies = () => {
         <div>
             <Navbar />
             <div className='max-w-6xl mx-auto my-10'>
-                <div className='flex flex-row items-center sm:justify-between my-5' >
+                <div className='flex flex-row items-center sm:justify-between m-5 gap-2' >
                     <Input
                         className='w-40 sm:w-fit'
                         value={input}
