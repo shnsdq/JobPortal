@@ -68,14 +68,14 @@ const AdminJobsTable = () => {
                                                 <PopoverTrigger className="p-1 rounded-md hover:bg-gray-100 transition-colors">
                                                     <MoreHorizontal className='cursor-pointer mx-auto sm:mr-0' />
                                                 </PopoverTrigger>
-                                                <PopoverContent className="w-36 p-2 bg-white border border-gray-200 shadow-md">
-                                                    <div 
+                                                <PopoverContent className="w-30 p-2 bg-white border border-gray-200 shadow-md">
+                                                    {/* <div 
                                                         onClick={() => navigate(`/admin/companies/${job._id}`)} 
                                                         className='flex items-center gap-2 w-full px-2 py-1.5 text-sm rounded-sm hover:bg-gray-100 cursor-pointer text-gray-700'
                                                     >
                                                         <Edit2 className='w-4 h-4' />
                                                         <span>Edit</span>
-                                                    </div>
+                                                    </div> */}
                                                     <div 
                                                         onClick={() => navigate(`/admin/jobs/${job._id}/applicants`)} 
                                                         className='flex items-center gap-2 w-full px-2 py-1.5 text-sm rounded-sm hover:bg-gray-100 cursor-pointer mt-0.5 text-gray-700'
