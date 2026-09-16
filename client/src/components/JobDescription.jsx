@@ -21,10 +21,10 @@ const JobDescription = () => {
 
   useEffect(() => {
 
-    // if(!user) {
-    //     navigate("/login");
-    //     return;
-    // }
+    if(!user) {
+        navigate("/login");
+        return;
+    }
 
     const fetchSingleJob = async () => {
       try {
@@ -72,7 +72,7 @@ const JobDescription = () => {
           <div className='flex flex-wrap items-center gap-2 mt-4'>
             <Badge className='text-blue-700 font-bold bg-blue-50' variant="ghost">Openings: {singleJob?.position} </Badge>
             <Badge className='text-[#F83002] font-bold bg-red-50' variant="ghost">{singleJob?.jobType}</Badge>
-            <Badge className='text-[#7209b7] font-bold bg-purple-50' variant="ghost">₹{singleJob?.salary} Lakh</Badge>
+            <Badge className='text-[#7209b7] font-bold bg-purple-50' variant="ghost">₹ {singleJob?.salary}Lakh</Badge>
           </div>
         </div>
 
@@ -120,7 +120,7 @@ const JobDescription = () => {
 
         <div className='flex flex-col sm:flex-row sm:items-baseline border-b border-gray-50 pb-2'>
           <span className='font-bold text-gray-700'>Salary:</span>
-          <span className='sm:pl-1 font-normal text-gray-600'>₹{singleJob?.salary}Lakh</span>
+          <span className='sm:pl-1 font-normal text-gray-600'>₹ {singleJob?.salary}Lakh</span>
         </div>
 
         <div className='flex flex-col sm:flex-row sm:items-baseline border-b border-gray-50 pb-2'>
