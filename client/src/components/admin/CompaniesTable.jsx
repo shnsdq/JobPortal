@@ -33,87 +33,140 @@ const CompaniesTable = () => {
 
     return (
 
-        <div className="w-full rounded-md border border-gray-200">
-            <Table className="w-full table-fixed">
-                <TableHeader>
-                    <TableRow>
-                        <TableHead className="w-[18%] px-2 sm:px-4">
-                            Logo
-                        </TableHead>
+        <div className="w-full">
 
-                        <TableHead className="w-[37%] px-2 sm:px-4">
-                            Name
-                        </TableHead>
-
-                        <TableHead className="w-[30%] px-2 sm:px-4">
-                            Date
-                        </TableHead>
-
-                        <TableHead className="w-[15%] px-2 sm:px-4 text-right">
-                            Action
-                        </TableHead>
-                    </TableRow>
-                </TableHeader>
-
-                <TableBody>
-                    {filterCompany.length === 0 ? (
+            {/* DESKTOP TABLE */}
+            <div className="hidden sm:block rounded-md border border-gray-200">
+                <Table>
+                    <TableHeader>
                         <TableRow>
-                            <TableCell
-                                colSpan={4}
-                                className="text-center py-4"
-                            >
-                                No Companies registered
-                            </TableCell>
+                            <TableHead>Logo</TableHead>
+                            <TableHead>Name</TableHead>
+                            <TableHead>Date</TableHead>
+                            <TableHead className="text-right">
+                                Action
+                            </TableHead>
                         </TableRow>
-                    ) : (
-                        filterCompany.map((company) => (
-                            <TableRow key={company._id}>
+                    </TableHeader>
 
-                                {/* Logo */}
-                                <TableCell className="px-2 sm:px-4">
-                                    <Avatar className="h-8 w-8 sm:h-10 sm:w-10">
-                                        <AvatarImage src={company?.logo} />
-                                    </Avatar>
+                    <TableBody>
+                        {filterCompany.length === 0 ? (
+                            <TableRow>
+                                <TableCell
+                                    colSpan={4}
+                                    className="text-center"
+                                >
+                                    No Companies registered
                                 </TableCell>
-
-                                {/* Name */}
-                                <TableCell className="px-2 sm:px-4 text-xs sm:text-sm break-words">
-                                    {company?.name}
-                                </TableCell>
-
-                                {/* Date */}
-                                <TableCell className="px-2 sm:px-4 text-xs sm:text-sm break-words">
-                                    {company?.createdAt?.split("T")[0]}
-                                </TableCell>
-
-                                {/* Action */}
-                                <TableCell className="px-2 sm:px-4 text-right">
-                                    <Popover>
-                                        <PopoverTrigger className="p-1">
-                                            <MoreHorizontal className="w-4 h-4 sm:w-5 sm:h-5" />
-                                        </PopoverTrigger>
-
-                                        <PopoverContent className="w-32 p-2">
-                                            <div
-                                                onClick={() =>
-                                                    navigate(
-                                                        `/admin/companies/${company._id}`
-                                                    )
-                                                }
-                                                className="flex items-center gap-2 px-2 py-1.5 text-sm rounded-sm hover:bg-gray-100 cursor-pointer"
-                                            >
-                                                <Edit2 className="w-4 h-4" />
-                                                <span>Edit</span>
-                                            </div>
-                                        </PopoverContent>
-                                    </Popover>
-                                </TableCell>
-
                             </TableRow>
-                        ))
-                    )}
-                </TableBody>
-            </Table>
+                        ) : (
+                            filterCompany.map((company) => (
+                                <TableRow key={company._id}>
+
+                                    <TableCell>
+                                        <Avatar>
+                                            <AvatarImage src={company?.logo} />
+                                        </Avatar>
+                                    </TableCell>
+
+                                    <TableCell>
+                                        {company?.name}
+                                    </TableCell>
+
+                                    <TableCell>
+                                        {company?.createdAt?.split("T")[0]}
+                                    </TableCell>
+
+                                    <TableCell className="text-right">
+                                        <Popover>
+                                            <PopoverTrigger className="p-1 rounded-md hover:bg-gray-100">
+                                                <MoreHorizontal />
+                                            </PopoverTrigger>
+
+                                            <PopoverContent className="w-36 p-2">
+                                                <div
+                                                    onClick={() =>
+                                                        navigate(
+                                                            `/admin/companies/${company._id}`
+                                                        )
+                                                    }
+                                                    className="flex items-center gap-2 px-2 py-1.5 text-sm rounded-sm hover:bg-gray-100 cursor-pointer"
+                                                >
+                                                    <Edit2 className="w-4 h-4" />
+                                                    <span>Edit</span>
+                                                </div>
+                                            </PopoverContent>
+                                        </Popover>
+                                    </TableCell>
+
+                                </TableRow>
+                            ))
+                        )}
+                    </TableBody>
+                </Table>
+            </div>
+
+
+            {/* MOBILE CARDS */}
+            <div className="sm:hidden space-y-3">
+
+                {filterCompany.length === 0 ? (
+                    <div className="text-center py-6 text-sm">
+                        No Companies registered
+                    </div>
+                ) : (
+                    filterCompany.map((company) => (
+
+                        <div
+                            key={company._id}
+                            className="border rounded-md p-3 flex items-center justify-between"
+                        >
+
+                            <div className="flex items-center gap-3 min-w-0">
+
+                                <Avatar className="h-10 w-10 shrink-0">
+                                    <AvatarImage src={company?.logo} />
+                                </Avatar>
+
+                                <div className="min-w-0">
+                                    <p className="font-medium text-sm break-words">
+                                        {company?.name}
+                                    </p>
+
+                                    <p className="text-xs text-gray-500 mt-1">
+                                        Date: {company?.createdAt?.split("T")[0]}
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <Popover>
+                                <PopoverTrigger className="p-1 rounded-md hover:bg-gray-100 shrink-0">
+                                    <MoreHorizontal className="w-5 h-5" />
+                                </PopoverTrigger>
+
+                                <PopoverContent className="w-32 p-2">
+                                    <div
+                                        onClick={() =>
+                                            navigate(
+                                                `/admin/companies/${company._id}`
+                                            )
+                                        }
+                                        className="flex items-center gap-2 px-2 py-1.5 text-sm rounded-sm hover:bg-gray-100 cursor-pointer"
+                                    >
+                                        <Edit2 className="w-4 h-4" />
+                                        <span>Edit</span>
+                                    </div>
+                                </PopoverContent>
+                            </Popover>
+
+                        </div>
+
+                    ))
+                )}
+
+            </div>
+
         </div>
     )
 }
