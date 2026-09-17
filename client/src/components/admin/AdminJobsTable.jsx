@@ -91,7 +91,7 @@ const AdminJobsTable = () => {
                                     </TableCell>
 
                                     <TableCell>
-                                        {job?.createdAt?.split("T")[0]}
+                                        {new Date(job?.createdAt).toLocaleDateString("en-GB")}
                                     </TableCell>
 
                                     <TableCell className="text-right">
@@ -213,7 +213,7 @@ const AdminJobsTable = () => {
                                 </p>
 
                                 <p className="text-sm text-gray-700">
-                                    {job?.createdAt?.split("T")[0]}
+                                    {new Date(job?.createdAt).toLocaleDateString("en-GB")}
                                 </p>
 
                             </div>

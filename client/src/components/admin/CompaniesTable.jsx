@@ -74,23 +74,23 @@ const CompaniesTable = () => {
                                     </TableCell>
 
                                     <TableCell>
-                                        {company?.createdAt?.split("T")[0]}
+                                        {new Date(company?.createdAt).toLocaleDateString("en-GB")}
                                     </TableCell>
 
                                     <TableCell className="text-right">
                                         <Popover>
-                                            <PopoverTrigger className="p-1 rounded-md hover:bg-gray-100">
+                                            <PopoverTrigger className="p-1 rounded-md hover:bg-gray-100 transition-colors">
                                                 <MoreHorizontal />
                                             </PopoverTrigger>
 
-                                            <PopoverContent className="w-36 p-2">
+                                            <PopoverContent className="w-32 p-2 bg-white">
                                                 <div
                                                     onClick={() =>
                                                         navigate(
                                                             `/admin/companies/${company._id}`
                                                         )
                                                     }
-                                                    className="flex items-center gap-2 px-2 py-1.5 text-sm rounded-sm hover:bg-gray-100 cursor-pointer"
+                                                    className="flex items-center gap-2 w-full px-2 py-1.5 text-sm rounded-sm hover:bg-gray-100 cursor-pointer text-gray-700"
                                                 >
                                                     <Edit2 className="w-4 h-4" />
                                                     <span>Edit</span>
@@ -134,7 +134,7 @@ const CompaniesTable = () => {
                                     </p>
 
                                     <p className="text-xs text-gray-500 mt-1">
-                                        Date: {company?.createdAt?.split("T")[0]}
+                                        Date: {new Date(company?.createdAt).toLocaleDateString("en-GB")}
                                     </p>
                                 </div>
 
@@ -145,14 +145,15 @@ const CompaniesTable = () => {
                                     <MoreHorizontal className="w-5 h-5" />
                                 </PopoverTrigger>
 
-                                <PopoverContent className="w-32 p-2">
+                                <PopoverContent className="w-32 p-2 bg-white">
                                     <div
                                         onClick={() =>
                                             navigate(
                                                 `/admin/companies/${company._id}`
                                             )
                                         }
-                                        className="flex items-center gap-2 px-2 py-1.5 text-sm rounded-sm hover:bg-gray-100 cursor-pointer"
+                                        className="flex items-center gap-2 w-full px-2 py-1.5 text-sm rounded-sm hover:bg-gray-100 cursor-pointer text-gray-700"
+
                                     >
                                         <Edit2 className="w-4 h-4" />
                                         <span>Edit</span>
